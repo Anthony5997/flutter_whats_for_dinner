@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart';
+import 'package:flutter_whats_for_dinner/services/app_exception.dart';
+import 'package:http/http.dart' as http;
 
 class ApiBaseHelper {
-  final String _baseUrl = "";
+  final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
 
   Future<dynamic> get(String url) async {
     var responseJson;
@@ -14,15 +15,42 @@ class ApiBaseHelper {
 
       responseJson = _returnResponse(response);
     } on SocketException {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> postLogin(email, password) async {
+    var responseJson;
+    try {
+      print(email);
+      print(password);
+      final response = await http.post(
+        Uri.parse(_baseUrl + "/auth/login"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+        }),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
     }
     return responseJson;
   }
 
   dynamic _returnResponse(http.Response response) {
+    print("statusCode");
+    print(response.statusCode);
+
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
+        print("responseJson :");
+        print(responseJson);
         return responseJson;
       case 400:
         throw BadRequestException(response.body.toString());
