@@ -27,4 +27,39 @@ class AuthRepository {
     //   throw Exception('Failed to load album');
     // }
   }
+
+  Future<void> register(username, email, password) async {
+    print('attempting register');
+    final response = await _helper.postRegister(username, email, password);
+    print("response in register function");
+    print(response);
+
+    // if (response.statusCode == 200) {
+    //   // If the server did return a 200 OK response,
+    //   // then parse the JSON.
+    //   return Album.fromJson(jsonDecode(response.body));
+    // } else {
+    //   // If the server did not return a 200 OK response,
+    //   // then throw an exception.
+    //   throw Exception('Failed to load album');
+    // }
+  }
+
+  Future<String> confirmRegister(
+    String username,
+    String confirmationCode,
+  ) async {
+    await Future.delayed(Duration(seconds: 2));
+    return 'abc';
+  }
+
+  Future<String> attemptAutoLogin() async {
+    print("AUTO LOGIN PROCESS");
+    await Future.delayed(Duration(seconds: 1));
+    throw Exception('not signed in');
+  }
+
+  Future<void> signOut() async {
+    await Future.delayed(Duration(seconds: 2));
+  }
 }

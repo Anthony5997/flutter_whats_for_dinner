@@ -42,6 +42,31 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> postRegister(name, email, password) async {
+    var responseJson;
+    try {
+      print("REGISTER METHOD");
+      print(name);
+      print(email);
+      print(password);
+      final response = await http.post(
+        Uri.parse(_baseUrl + "/auth/register"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'nickname': name,
+          'email': email,
+          'password': password,
+        }),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
   dynamic _returnResponse(http.Response response) {
     print("statusCode");
     print(response.statusCode);
@@ -55,6 +80,10 @@ class ApiBaseHelper {
       case 400:
         throw BadRequestException(response.body.toString());
       case 401:
+        var responseJson = json.decode(response.body.toString());
+        print("responseJson :");
+        print(responseJson);
+        return responseJson;
       case 403:
         throw UnauthorisedException(response.body.toString());
       case 500:
