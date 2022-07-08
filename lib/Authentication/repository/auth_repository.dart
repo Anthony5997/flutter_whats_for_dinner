@@ -1,3 +1,4 @@
+import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_bloc.dart';
 import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,38 +12,21 @@ class AuthRepository {
 
   final ApiBaseHelper _helper = ApiBaseHelper();
 
-  Future<void> login(username, password) async {
+  Future<dynamic> login(username, password) async {
     print('attempting login');
     final response = await _helper.postLogin(username, password);
     print("response in login function");
     print(response);
 
-    // if (response.statusCode == 200) {
-    //   // If the server did return a 200 OK response,
-    //   // then parse the JSON.
-    //   return Album.fromJson(jsonDecode(response.body));
-    // } else {
-    //   // If the server did not return a 200 OK response,
-    //   // then throw an exception.
-    //   throw Exception('Failed to load album');
-    // }
+    return response;
   }
 
-  Future<void> register(username, email, password) async {
+  Future<dynamic> register(username, email, password) async {
     print('attempting register');
     final response = await _helper.postRegister(username, email, password);
     print("response in register function");
     print(response);
-
-    // if (response.statusCode == 200) {
-    //   // If the server did return a 200 OK response,
-    //   // then parse the JSON.
-    //   return Album.fromJson(jsonDecode(response.body));
-    // } else {
-    //   // If the server did not return a 200 OK response,
-    //   // then throw an exception.
-    //   throw Exception('Failed to load album');
-    // }
+    return response;
   }
 
   Future<String> confirmRegister(
@@ -55,11 +39,13 @@ class AuthRepository {
 
   Future<String> attemptAutoLogin() async {
     print("AUTO LOGIN PROCESS");
-    await Future.delayed(Duration(seconds: 1));
     throw Exception('not signed in');
   }
 
-  Future<void> signOut() async {
-    await Future.delayed(Duration(seconds: 2));
-  }
+  // Future<void> signOut() async {
+  //   // await Future.delayed(Duration(seconds: 2));
+  //   print("deco");
+  //   authFlow.add(AuthenticationFlowShowLogoutEvent());
+  //   authFlow.emit(AuthenticationFlowShowLogoutState());
+  // }
 }

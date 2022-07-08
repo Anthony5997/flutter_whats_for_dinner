@@ -9,3 +9,5 @@ class ConfirmationCodeChanged extends ConfirmationEvent {
 }
 
 class ConfirmationSubmitted extends ConfirmationEvent {}
+
+class ConfirmationSucessEvent extends ConfirmationEvent {}

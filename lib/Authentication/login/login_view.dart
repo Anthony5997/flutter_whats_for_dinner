@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_cubit.dart';
+import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_bloc.dart';
 import 'package:flutter_whats_for_dinner/Authentication/login/login_bloc.dart';
 import 'package:flutter_whats_for_dinner/Authentication/login/login_event.dart';
 import 'package:flutter_whats_for_dinner/Authentication/login/login_state.dart';
@@ -16,7 +16,7 @@ class LoginView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => LoginBloc(
           authRepo: context.read<AuthRepository>(),
-          authCubit: context.read<AuthenticationFlowCubit>(),
+          authBloc: context.read<AuthenticationFlowBloc>(),
         ),
         child: Stack(alignment: Alignment.bottomCenter, children: [
           _loginForm(),
@@ -102,7 +102,9 @@ class LoginView extends StatelessWidget {
     return SafeArea(
       child: TextButton(
         child: Text('Don\'t have an account? Sign up.'),
-        onPressed: () => context.read<AuthenticationFlowCubit>().showSignUp(),
+        onPressed: () => context
+            .read<AuthenticationFlowBloc>()
+            .add(AuthenticationFlowShowRegisterEvent()),
       ),
     );
   }

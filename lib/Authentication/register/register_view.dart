@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_cubit.dart';
+import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_bloc.dart';
 import 'package:flutter_whats_for_dinner/Authentication/register/register_bloc.dart';
 import 'package:flutter_whats_for_dinner/Authentication/repository/auth_repository.dart';
 import 'package:flutter_whats_for_dinner/Authentication/services/form_submission_status.dart';
@@ -14,7 +14,7 @@ class RegisterView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => RegisterBloc(
           authRepo: context.read<AuthRepository>(),
-          authCubit: context.read<AuthenticationFlowCubit>(),
+          authBloc: context.read<AuthenticationFlowBloc>(),
         ),
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -119,7 +119,9 @@ class RegisterView extends StatelessWidget {
     return SafeArea(
       child: TextButton(
         child: const Text('Already have an account? Sign in.'),
-        onPressed: () => context.read<AuthenticationFlowCubit>().showLogin(),
+        onPressed: () => context
+            .read<AuthenticationFlowBloc>()
+            .add(AuthenticationFlowShowLoginEvent()),
       ),
     );
   }

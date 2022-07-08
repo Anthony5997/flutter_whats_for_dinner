@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_cubit.dart';
+import 'package:flutter_whats_for_dinner/Authentication/authentication_flow/authentication_flow_bloc.dart';
 import 'package:flutter_whats_for_dinner/Authentication/login/login_event.dart';
 import 'package:flutter_whats_for_dinner/Authentication/login/login_state.dart';
 import 'package:flutter_whats_for_dinner/Authentication/repository/auth_repository.dart';
@@ -8,9 +8,9 @@ import 'package:flutter_whats_for_dinner/Authentication/services/form_submission
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepo;
-  final AuthenticationFlowCubit authCubit;
+  final AuthenticationFlowBloc authBloc;
 
-  LoginBloc({required this.authRepo, required this.authCubit})
+  LoginBloc({required this.authRepo, required this.authBloc})
       : super(LoginState()) {
     on<LoginEvent>(_onEvent);
   }
@@ -35,21 +35,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         print('try');
 
-        await authRepo.login(
+        var response = await authRepo.login(
           state.username,
           state.password,
         );
+
+        print("RESPONSE AFTER LOGIN");
+        print(response);
         emit(state.copyWith(formStatus: SubmissionSuccess()));
+        print("FORM AFTER SubmissionSuccess");
 
-        // print("session lancé");
-
-        authCubit.launchSession(AuthenticationCredentials(
-          username: state.username,
-          // userId: userId,
-        ));
+        if (response["status"]) {
+          authBloc.add(AuthenticationFlowShowAuthenticationSuccessEvent());
+        } else {
+          authBloc.add(AuthenticationFlowShowLogoutEvent());
+        }
       } catch (e) {
         print('catch');
-
         emit(state.copyWith(formStatus: SubmissionFailed(e.toString())));
       }
     }

@@ -1,13 +1,12 @@
-part of 'session_cubit.dart';
+part of 'session_bloc.dart';
 
-abstract class SessionState {}
+abstract class SessionState extends Equatable {
+  const SessionState();
 
-class UnknownSessionState extends SessionState {}
-
-class Unauthenticated extends SessionState {}
-
-class Authenticated extends SessionState {
-  final dynamic user;
-
-  Authenticated({this.user});
+  @override
+  List<Object> get props => [];
 }
+
+class SessionInitial extends SessionState {}
+
+class SessionLogoutState extends SessionState {}

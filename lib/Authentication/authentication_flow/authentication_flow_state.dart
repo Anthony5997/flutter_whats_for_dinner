@@ -1,4 +1,4 @@
-part of 'authentication_flow_cubit.dart';
+part of 'authentication_flow_bloc.dart';
 
 abstract class AuthenticationFlowState extends Equatable {
   const AuthenticationFlowState();
@@ -9,8 +9,26 @@ abstract class AuthenticationFlowState extends Equatable {
 
 class AuthenticationFlowInitial extends AuthenticationFlowState {}
 
-class AuthenticationFlowLogin extends AuthenticationFlowState {}
+class AuthenticationFlowShowLoginState extends AuthenticationFlowState {}
 
-class AuthenticationFlowRegister extends AuthenticationFlowState {}
+class AuthenticationFlowShowRegisterState extends AuthenticationFlowState {}
 
-class AuthenticationFlowConfirmRegister extends AuthenticationFlowState {}
+class AuthenticationFlowShowConfirmRegisterState
+    extends AuthenticationFlowState {
+  var credentials;
+
+  AuthenticationFlowShowConfirmRegisterState({
+    this.credentials,
+  });
+
+  AuthenticationFlowShowConfirmRegisterState copyWith({
+    credentials,
+  }) {
+    return AuthenticationFlowShowConfirmRegisterState(credentials: credentials);
+  }
+}
+
+class AuthenticationFlowShowAuthenticationSuccessState
+    extends AuthenticationFlowState {}
+
+class AuthenticationFlowShowLogoutState extends AuthenticationFlowState {}

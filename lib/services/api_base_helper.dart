@@ -23,8 +23,12 @@ class ApiBaseHelper {
   Future<dynamic> postLogin(email, password) async {
     var responseJson;
     try {
+      print("LOGIN METHOD");
+
       print(email);
       print(password);
+      print("===================================");
+
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/login"),
         headers: <String, String>{
@@ -49,6 +53,8 @@ class ApiBaseHelper {
       print(name);
       print(email);
       print(password);
+      print("===================================");
+
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/register"),
         headers: <String, String>{
@@ -74,15 +80,11 @@ class ApiBaseHelper {
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
-        print("responseJson :");
-        print(responseJson);
         return responseJson;
       case 400:
         throw BadRequestException(response.body.toString());
       case 401:
         var responseJson = json.decode(response.body.toString());
-        print("responseJson :");
-        print(responseJson);
         return responseJson;
       case 403:
         throw UnauthorisedException(response.body.toString());
