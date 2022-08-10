@@ -8,7 +8,7 @@ part 'Fridge.g.dart';
 @JsonSerializable()
 class Fridge extends Equatable {
   final int id;
-  final User user;
+  final User? user;
   final List<Ingredient> ingredients_list;
   final DateTime? created_at;
   final DateTime? updated_at;

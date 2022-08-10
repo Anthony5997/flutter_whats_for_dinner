@@ -11,7 +11,7 @@ class User extends Equatable {
   final String nickname;
   final String email;
   final String password;
-  final String profile_picture;
+  final String? profile_picture;
   final DateTime? created_at;
   final DateTime? updated_at;
 
@@ -20,7 +20,7 @@ class User extends Equatable {
     required this.nickname,
     required this.email,
     required this.password,
-    required this.profile_picture,
+    this.profile_picture,
     this.created_at,
     this.updated_at,
   });
