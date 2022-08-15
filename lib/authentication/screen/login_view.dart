@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/email_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/password_field.dart';
 
@@ -14,6 +14,14 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 40,
+        centerTitle: true,
+        title: const Text(
+          'Connexion',
+          style: TextStyle(fontSize: 24, fontFamily: 'FruitPunch'),
+        ),
+      ),
       body: FormBuilder(
         key: formKey,
         child: Container(
@@ -22,6 +30,15 @@ class LoginView extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Image.asset(
+                    'assets/images/Logo-genial.png',
+                    height: 190,
+                  ),
+                  const Text(
+                    "What's For Dinner",
+                    style: TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
+                  ),
+                  const SizedBox(height: 30),
                   CustomEmailField(),
                   const SizedBox(height: 30),
                   CustomPasswordField(),

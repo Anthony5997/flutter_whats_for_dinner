@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/email_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/nickname_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/password_field.dart';
@@ -15,6 +15,14 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 40,
+        centerTitle: true,
+        title: const Text(
+          'Inscription',
+          style: TextStyle(fontSize: 24, fontFamily: 'FruitPunch'),
+        ),
+      ),
       body: FormBuilder(
         key: formKey,
         child: Container(
@@ -22,10 +30,19 @@ class RegisterView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Image.asset(
+                'assets/images/Logo-genial.png',
+                height: 190,
+              ),
+              const Text(
+                "What's For Dinner",
+                style: TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
+              ),
+              const SizedBox(height: 30),
               CustomNicknameField(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               CustomEmailField(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               CustomPasswordField(),
               const SizedBox(height: 30),
               Padding(

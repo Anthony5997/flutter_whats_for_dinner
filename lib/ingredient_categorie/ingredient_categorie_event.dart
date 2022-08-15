@@ -6,3 +6,5 @@ abstract class IngredientCategorieEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class IngredientCategorieInitialEvent extends IngredientCategorieEvent {}

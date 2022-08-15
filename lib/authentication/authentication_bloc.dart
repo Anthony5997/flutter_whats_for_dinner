@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/src/widgets/form.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/repository/authentication_repository.dart';
+import 'package:flutter_whats_for_dinner/authentication/repository/authentication_repository.dart';
 import 'package:flutter_whats_for_dinner/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,6 +67,10 @@ class AuthenticationBloc
       } catch (e) {
         print('catch');
       }
+    });
+
+    on<ConnexionLoadingEvent>((event, emit) {
+      emit(ConnexionLoadingState());
     });
 
     on<AuthenticationSuccessEvent>((event, emit) {

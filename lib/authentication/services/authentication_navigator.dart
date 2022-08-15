@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/Session/services/session_navigator.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/authentication_bloc.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/screen/login_view.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/screen/register_view.dart';
+import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/authentication/screen/login_view.dart';
+import 'package:flutter_whats_for_dinner/authentication/screen/register_view.dart';
 import 'package:flutter_whats_for_dinner/screen/loading_screen.dart';
 
 class AuthenticationNavigator extends StatefulWidget {

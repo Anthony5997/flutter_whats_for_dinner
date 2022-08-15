@@ -9,5 +9,9 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
     on<FridgeEvent>((event, emit) {
       // TODO: implement event handler
     });
+
+    on<FridgeEvent>((event, emit) {
+      // TODO: implement event handler
+    });
   }
 }

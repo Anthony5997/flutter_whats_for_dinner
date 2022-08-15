@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionView extends StatelessWidget {
@@ -15,16 +14,18 @@ class SessionView extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text('Session View'),
-            TextButton(
-                child: const Text('sign out'),
-                onPressed: () =>
-                    context.read<AuthenticationBloc>().add(LogoutEvent())),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Session View'),
+              TextButton(
+                  child: const Text('sign out'),
+                  onPressed: () =>
+                      context.read<AuthenticationBloc>().add(LogoutEvent())),
+            ],
+          ),
         ),
       ),
     );

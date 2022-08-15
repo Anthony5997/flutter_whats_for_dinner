@@ -6,3 +6,5 @@ abstract class FridgeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FridgeEventInitial extends FridgeEvent {}

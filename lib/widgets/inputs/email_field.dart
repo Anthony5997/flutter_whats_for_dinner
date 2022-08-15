@@ -20,8 +20,12 @@ class CustomEmailField extends StatelessWidget {
             errorText: "Veuillez renseigner un email valide."),
       ]),
       keyboardType: TextInputType.emailAddress,
-      decoration:
-          const InputDecoration(label: Text("Email"), icon: Icon(Icons.email)),
+      decoration: const InputDecoration(
+        label: Text("Email"),
+        icon: Icon(Icons.email),
+        hoverColor: Colors.amber,
+        hintText: '',
+      ),
     );
   }
 }

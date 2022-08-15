@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_whats_for_dinner/Session/services/session_navigator.dart';
 import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/SimpleBlocObserver.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/authentication_bloc.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/repository/authentication_repository.dart';
-import 'package:flutter_whats_for_dinner/authentication_bloc/services/authentication_navigator.dart';
+import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/authentication/services/authentication_navigator.dart';
+import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categorie_bloc.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 void main() {
   BlocOverrides.runZoned(
@@ -26,14 +28,19 @@ class MyApp extends StatelessWidget {
         BlocProvider<SessionBloc>(
           create: (BuildContext context) => SessionBloc(),
         ),
+        BlocProvider<IngredientCategorieBloc>(
+          create: (BuildContext context) => IngredientCategorieBloc(),
+        ),
       ],
       child: MaterialApp(
+        theme: LigthTheme.themedata,
         debugShowCheckedModeBanner: false,
         title: 'What\'s For Dinner',
         // theme: theme,
         initialRoute: '/',
         routes: {
           '/': ((context) => const AuthenticationNavigator()),
+          '/session': ((context) => SessionNavigator()),
         },
       ),
     );
