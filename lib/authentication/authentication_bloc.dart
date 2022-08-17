@@ -19,7 +19,7 @@ class AuthenticationBloc
 
   AuthenticationBloc() : super(AutoConnexionAttemptState()) {
     on<AutoConnexionAttemptEvent>((event, emit) async {
-      // emit(ConnexionLoadingState());
+      emit(ConnexionLoadingState());
       await authenticationRepository.attemptAutoLogin(emit);
     });
 
@@ -32,6 +32,7 @@ class AuthenticationBloc
     });
 
     on<LoginEvent>((event, emit) async {
+      emit(ConnexionLoadingState());
       try {
         print('try login');
         print(event.email);

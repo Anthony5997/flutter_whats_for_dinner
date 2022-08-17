@@ -5,7 +5,10 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          backgroundColor: Color(0xFFfffdf7),
+          color: Color(0xFFCA2525),
+        ),
       ),
     );
   }
