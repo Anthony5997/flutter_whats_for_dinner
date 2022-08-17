@@ -22,11 +22,22 @@ class IngredientCategoryView extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('ingredientCategory View'),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Liste des catégories d'ingrédient",
+                style: TextStyle(
+                  fontFamily: "FruitPunch",
+                  fontSize: 20,
+                ),
+              ),
+            ),
             ElevatedButton(
               child: const Text('Retour au Frigo'),
               onPressed: () =>

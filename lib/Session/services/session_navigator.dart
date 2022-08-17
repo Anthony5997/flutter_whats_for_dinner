@@ -34,9 +34,13 @@ class SessionNavigator extends StatelessWidget {
                     'assets/images/Logo-genial.png',
                     height: 100,
                   ),
-                  Text(
+                  const Text(
                     'Paramètres',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "LemonDays",
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -44,14 +48,22 @@ class SessionNavigator extends StatelessWidget {
             ListTile(
               title: const Text(
                 'Mes préférences',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "LemonDays",
+                  fontSize: 12,
+                ),
               ),
               onTap: () {},
             ),
             ListTile(
               title: const Text(
                 'Déconnexion',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "LemonDays",
+                  fontSize: 12,
+                ),
               ),
               onTap: () {
                 context.read<AuthenticationBloc>().add(LogoutEvent());
@@ -62,7 +74,7 @@ class SessionNavigator extends StatelessWidget {
       ),
       body: BlocProvider<SessionBloc>(
         create: (context) =>
-            SessionBloc()..add(SessionPageSelectedEvent(index: 0)),
+            SessionBloc()..add(SessionPageSelectedEvent(index: 1)),
         child: BlocBuilder<SessionBloc, SessionState>(
           builder: (context, state) {
             print("=================");

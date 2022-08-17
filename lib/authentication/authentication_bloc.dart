@@ -18,9 +18,9 @@ class AuthenticationBloc
   // User user = User(id: "", nickname: "", email: "", password: "");
 
   AuthenticationBloc() : super(AutoConnexionAttemptState()) {
-    on<AutoConnexionAttemptEvent>((event, emit) {
+    on<AutoConnexionAttemptEvent>((event, emit) async {
       // emit(ConnexionLoadingState());
-      authenticationRepository.attemptAutoLogin(emit);
+      await authenticationRepository.attemptAutoLogin(emit);
     });
 
     on<ShowLoginEvent>((event, emit) {

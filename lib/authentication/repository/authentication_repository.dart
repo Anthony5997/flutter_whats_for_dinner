@@ -30,10 +30,11 @@ class AuthenticationRepository {
   Future<dynamic> attemptAutoLogin(Emitter emit) async {
     final SharedPreferences pref = await _userPreferences;
     print("JE TENTE DE ME CO");
+    print(pref.getBool("logged"));
     // await getUserSharedPreferences(pref);
-    if (pref.getBool("logged") == null) {
-      emit(LoginState());
+    if (await pref.getBool("logged") == null) {
       print("AUTO CONNEXION ECHOUE");
+      emit(LoginState());
     } else {
       print("AUTO CONNEXION REUSSIS");
 

@@ -51,13 +51,21 @@ class LigthTheme {
       selectedIconTheme: IconThemeData(color: PrimaryColor),
       selectedItemColor: PrimaryColor,
       unselectedItemColor: Colors.blueGrey,
-      selectedLabelStyle: TextStyle(color: Color.fromRGBO(120, 120, 120, 1)),
+      selectedLabelStyle: const TextStyle(
+          color: Color.fromRGBO(120, 120, 120, 1),
+          fontFamily: "LemonDays",
+          fontSize: 14),
+      unselectedLabelStyle:
+          const TextStyle(fontFamily: "LemonDays", fontSize: 14),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           primary: PrimaryColor,
           textStyle: const TextStyle(
-              fontSize: 16.0, fontStyle: FontStyle.italic, color: Colors.red),
+              fontSize: 16.0,
+              fontFamily: "LemonDays",
+              fontStyle: FontStyle.italic,
+              color: Colors.red),
           side: BorderSide(color: PrimaryColorDark, width: .5),
           elevation: 4,
           padding: EdgeInsets.all(20)),
