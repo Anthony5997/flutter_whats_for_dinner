@@ -14,12 +14,8 @@ class SessionRecipeEvent extends SessionEvent {}
 class SessionIngredientCategoryEvent extends SessionEvent {}
 
 class SessionPageSelectedEvent extends SessionEvent {
-  const SessionPageSelectedEvent({required this.index}) : super();
-
-  final int index;
-
-  @override
-  String toString() => 'PageTapped: $index';
+  int index;
+  SessionPageSelectedEvent(this.index) : super();
 }
 
 class SessionLogoutEvent extends SessionEvent {}

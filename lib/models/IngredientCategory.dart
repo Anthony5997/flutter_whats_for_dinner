@@ -19,8 +19,7 @@ class IngredientCategory extends Equatable {
     this.updated_at,
   });
 
-  factory IngredientCategory.fromJson(Map<String, dynamic> json) =>
-      _$IngredientCategoryFromJson(json);
+  factory IngredientCategory.fromJson(Map<String, dynamic> json) => _$IngredientCategoryFromJson(json);
 
   /// Connect the generated [_$IngredientCategoryToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$IngredientCategoryToJson(this);

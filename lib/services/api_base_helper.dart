@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
-  final Future<SharedPreferences> _userPreferences =
-      SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
 
   Future<dynamic> get(String url) async {
     var responseJson;
@@ -29,10 +28,59 @@ class ApiBaseHelper {
     var token = await prefs.get("token");
 
     try {
-      print("block ici ?");
       print('$_baseUrl$url');
 
       final response = await http.get(Uri.parse(_baseUrl + url), headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control_Allow_Origin': '*',
+      });
+
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
+/* NE FONCTIONNE QUE POUR L'AJOUT AU FRIDGE POUR L INSTANT */
+  Future<dynamic> postAuth(String url, array) async {
+    var responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = await prefs.get("token");
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+          'Access-Control_Allow_Origin': '*',
+        },
+        body: jsonEncode(<String, String>{
+          'idUser': array['idUser'],
+          'ingredient_id': array['ingredient_id'],
+        }),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> getAuthParametre(String url) async {
+    var responseJson;
+    final SharedPreferences prefs = await _userPreferences;
+    var token = await prefs.get("token");
+    var id = await prefs.get("id");
+
+    try {
+      print('$_baseUrl$url/$id');
+
+      final response = await http.get(Uri.parse(_baseUrl + url + "/$id"), headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

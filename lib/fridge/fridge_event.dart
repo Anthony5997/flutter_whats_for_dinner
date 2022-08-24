@@ -8,3 +8,7 @@ abstract class FridgeEvent extends Equatable {
 }
 
 class FridgeEventInitial extends FridgeEvent {}
+
+class FridgeLoadingEvent extends FridgeEvent {}
+
+class FridgeLoadedEvent extends FridgeEvent {}

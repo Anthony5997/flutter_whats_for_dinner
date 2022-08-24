@@ -1,40 +1,32 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_whats_for_dinner/screen/loading_screen.dart';
 
 part 'session_event.dart';
 part 'session_state.dart';
 
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
-  int currentIndex = 0;
+  // int currentIndex = 0;
   SessionBloc() : super(SessionInitial()) {
-    on<SessionEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<SessionEvent>((event, emit) {});
 
     on<SessionFridgeEvent>((event, emit) {
       emit(SessionInitial());
     });
 
+    on<SessionIngredientCategoryEvent>((event, emit) {
+      emit(SessionIngredientCategoryState());
+    });
+
     on<SessionPageSelectedEvent>((event, emit) async {
-      print("Je change mon index ! ");
-      currentIndex = await event.index;
-      print(currentIndex);
-
-      emit(SessionPageSelectedState(currentIndex: currentIndex));
-
-      if (this.currentIndex == 0) {
-        print("Jaffiche session initial!");
-        print("===================================");
-
-        //String data = await _getFirstPageData();
+      if (event.index == 0) {
         emit(SessionInitial());
       }
-      if (this.currentIndex == 1) {
-        print("Jaffiche recette !");
-        print("===================================");
-
-        //int data = await _getSecondPageData();
+      if (event.index == 1) {
         emit(SessionIngredientCategoryState());
+      }
+      if (event.index == 2) {
+        emit(SessionLoadingState());
       }
     });
 

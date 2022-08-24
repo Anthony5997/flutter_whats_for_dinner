@@ -10,15 +10,15 @@ abstract class SessionState extends Equatable {
 class SessionInitial extends SessionState {}
 
 class SessionPageSelectedState extends SessionState {
-  final int currentIndex;
+  int currentIndex;
 
-  SessionPageSelectedState({required this.currentIndex}) : super();
+  SessionPageSelectedState(this.currentIndex) : super();
 
   @override
   String toString() => 'CurrentIndexChanged to $currentIndex';
 }
 
-class PageLoadingState extends SessionState {
+class SessionLoadingState extends SessionState {
   @override
   String toString() => 'PageLoading';
 }

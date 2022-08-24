@@ -7,4 +7,8 @@ abstract class IngredientCategorieEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class IngredientCategorieInitialEvent extends IngredientCategorieEvent {}
+class IngredientCategorieEventInitial extends IngredientCategorieEvent {}
+
+class IngredientCategorieLoadingEvent extends IngredientCategorieEvent {}
+
+class IngredientCategorieLoadedEvent extends IngredientCategorieEvent {}

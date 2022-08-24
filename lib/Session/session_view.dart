@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionView extends StatelessWidget {
@@ -28,6 +29,7 @@ class SessionView extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

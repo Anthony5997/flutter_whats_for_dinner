@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/SimpleBlocObserver.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/services/authentication_navigator.dart';
+import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categorie_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<IngredientCategorieBloc>(
           create: (BuildContext context) => IngredientCategorieBloc(),
+        ),
+        BlocProvider<FridgeBloc>(
+          create: (BuildContext context) => FridgeBloc(),
         ),
       ],
       child: MaterialApp(

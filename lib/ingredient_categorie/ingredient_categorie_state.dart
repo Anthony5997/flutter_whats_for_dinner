@@ -10,7 +10,10 @@ abstract class IngredientCategorieState extends Equatable {
 class IngredientCategorieInitial extends IngredientCategorieState {}
 
 class IngredientCategorieLoadedState extends IngredientCategorieState {
-  IngredientCategorieLoadedState({required this.ingredientCat});
-
-  List<dynamic> ingredientCat;
+  var ingredientCat;
+  IngredientCategorieLoadedState(this.ingredientCat);
 }
+
+class IngredientCategorieLoadingState extends IngredientCategorieState {}
+
+class IngredientCategorieErrorState extends IngredientCategorieState {}

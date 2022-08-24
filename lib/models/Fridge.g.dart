@@ -8,7 +8,9 @@ part of 'Fridge.dart';
 
 Fridge _$FridgeFromJson(Map<String, dynamic> json) => Fridge(
       id: json['id'] as int,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       ingredients_list: (json['ingredients_list'] as List<dynamic>)
           .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
           .toList(),
