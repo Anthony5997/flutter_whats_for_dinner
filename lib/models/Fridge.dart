@@ -6,16 +6,14 @@ import 'package:json_annotation/json_annotation.dart';
 part 'Fridge.g.dart';
 
 @JsonSerializable()
-class Fridge extends Equatable {
-  final int id;
-  final User? user;
-  final List<Ingredient> ingredients_list;
+class Fridge {
+  final String id;
+  List<Ingredient> ingredients_list;
   final DateTime? created_at;
-  final DateTime? updated_at;
+  DateTime? updated_at;
 
   Fridge({
     required this.id,
-    required this.user,
     required this.ingredients_list,
     this.created_at,
     this.updated_at,

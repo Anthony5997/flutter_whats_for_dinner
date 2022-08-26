@@ -9,20 +9,21 @@ import 'package:http/http.dart' as http;
 
 class FridgeRepository {
   final ApiBaseHelper _helper = ApiBaseHelper();
-  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences =
+      SharedPreferences.getInstance();
 
-  Future<dynamic> getUserFridge() async {
+  Future<Fridge> getUserFridge() async {
     final response = await _helper.getAuthParametre("/fridge");
 
-    print("response");
-    print(response);
-    // List<Ingredient> test = [];
-    // response["results"].forEach((result) => {test.add(Ingredient.fromJson(result))});
-    // print("test");
-    // print(test);
-    // Fridge listFridge = Fridge(id: response.results[0].id, user: response.results[0].user_id, ingredients_list: test);
-    // print("listFridge");
-    // print(listFridge);
-    return response;
+    List<Ingredient> ingredients = [];
+
+    response["results"]["ingredients"].forEach((result) {
+      ingredients.add(Ingredient.fromJson(result));
+    });
+
+    Fridge listFridge =
+        Fridge(id: response["results"]["id"], ingredients_list: ingredients);
+
+    return listFridge;
   }
 }

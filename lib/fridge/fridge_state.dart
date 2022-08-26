@@ -12,7 +12,7 @@ class FridgeInitial extends FridgeState {}
 class FridgeLoadingState extends FridgeState {}
 
 class FridgeLoadedState extends FridgeState {
-  dynamic fridge;
+  Fridge fridge;
   FridgeLoadedState(this.fridge);
 }
 

@@ -4,22 +4,25 @@ import 'package:json_annotation/json_annotation.dart';
 part 'Ingredient.g.dart';
 
 @JsonSerializable()
-class Ingredient extends Equatable {
-  final int id;
-  final String name;
-  final String image;
-  final String category;
-  final DateTime? created_at;
-  final DateTime? updated_at;
+class Ingredient {
+  int id;
+  String name;
+  String image;
+  int category_id;
+  String? category_name;
+  int? quantity;
+  int? unit_id;
+  String? unit_name;
 
-  Ingredient({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.category,
-    this.created_at,
-    this.updated_at,
-  });
+  Ingredient(
+      {required this.id,
+      required this.name,
+      required this.image,
+      required this.category_id,
+      this.category_name,
+      this.quantity,
+      this.unit_id,
+      this.unit_name});
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);

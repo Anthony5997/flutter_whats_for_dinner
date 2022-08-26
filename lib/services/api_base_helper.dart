@@ -7,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
-  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences =
+      SharedPreferences.getInstance();
 
   Future<dynamic> get(String url) async {
     var responseJson;
@@ -75,12 +76,13 @@ class ApiBaseHelper {
     var responseJson;
     final SharedPreferences prefs = await _userPreferences;
     var token = await prefs.get("token");
-    var id = await prefs.get("id");
+    // var id = await prefs.get("id");
 
     try {
-      print('$_baseUrl$url/$id');
+      print('$_baseUrl$url');
+      print(token);
 
-      final response = await http.get(Uri.parse(_baseUrl + url + "/$id"), headers: {
+      final response = await http.get(Uri.parse(_baseUrl + url), headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

@@ -31,25 +31,28 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   print("STATE");
                   print(state);
                   if (state is FridgeLoadedState) {
-                    print(state.fridge[0]['name']);
-
                     return Expanded(
                       child: ListView.builder(
-                        itemCount: state.fridge.length,
+                        itemCount: state.fridge.ingredients_list.length,
                         itemBuilder: (context, index) => Card(
-                          key: ValueKey(state.fridge[index]["id"]),
+                          key:
+                              ValueKey(state.fridge.ingredients_list[index].id),
                           color: Colors.amberAccent,
                           elevation: 4,
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: ListTile(
                             leading: Text(
-                              state.fridge[index]["ingredient_id"].toString(),
+                              state.fridge.ingredients_list[index].id
+                                  .toString(),
                               style: const TextStyle(fontSize: 24),
                             ),
                             // Image.network('http://laravel_whats_for_dinner.test/public/assets/ingredients/${state.fridge[index]["image"]}'),
 
-                            title: Text(state.fridge[index]['name']),
-                            subtitle: Text(state.fridge[index]["category_name"]),
+                            title:
+                                Text(state.fridge.ingredients_list[index].name),
+                            subtitle: Text(state.fridge.ingredients_list[index]
+                                    .category_name ??
+                                ""),
                             trailing: IconButton(
                               icon: const Icon(
                                 Icons.delete_forever,
@@ -62,19 +65,16 @@ class _FridgeScreenState extends State<FridgeScreen> {
                           ),
                         ),
                       ),
-                      // ListView(
-                      //   children: [
-                      //     for (var i = 0; i < 5; i++) Text("Salut $i"),
-                      //   ],
-                      // ),
                     );
                   } else if (state is FridgeEmptyState) {
                     return Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 48.0, horizontal: 12),
                         child: Text(
                           "Votre frigo est vide, remplisser le !",
-                          style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                          style:
+                              TextStyle(fontFamily: "LemonDays", fontSize: 24),
                         ),
                       ),
                     );
@@ -91,7 +91,8 @@ class _FridgeScreenState extends State<FridgeScreen> {
               ElevatedButton(
                 child: const Text('Ajouter ingrédient'),
                 onPressed: () {
-                  BlocProvider.of<SessionBloc>(context).add(SessionIngredientCategoryEvent());
+                  BlocProvider.of<SessionBloc>(context)
+                      .add(SessionIngredientCategoryEvent());
                 },
               ),
             ],

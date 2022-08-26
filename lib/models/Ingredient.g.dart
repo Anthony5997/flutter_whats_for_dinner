@@ -10,16 +10,21 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       id: json['id'] as int,
       name: json['name'] as String,
       image: json['image'] as String,
-      category: json['category'] as String,
-      created_at: json['created_at'] == null ? null : DateTime.parse(json['created_at'] as String),
-      updated_at: json['updated_at'] == null ? null : DateTime.parse(json['updated_at'] as String),
+      category_id: json['category_id'] as int,
+      category_name: json['category_name'] as String?,
+      quantity: json['quantity'] as int?,
+      unit_id: json['unit_id'] as int?,
+      unit_name: json['unit_name'] as String?,
     );
 
-Map<String, dynamic> _$IngredientToJson(Ingredient instance) => <String, dynamic>{
+Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'image': instance.image,
-      'category': instance.category,
-      'created_at': instance.created_at?.toIso8601String(),
-      'updated_at': instance.updated_at?.toIso8601String(),
+      'category_id': instance.category_id,
+      'category_name': instance.category_name,
+      'quantity': instance.quantity,
+      'unit_id': instance.unit_id,
+      'unit_name': instance.unit_name,
     };
