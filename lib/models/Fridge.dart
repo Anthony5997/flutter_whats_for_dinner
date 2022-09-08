@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
-import 'package:flutter_whats_for_dinner/models/User.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Fridge.g.dart';

@@ -8,3 +8,15 @@ abstract class RecipeListState extends Equatable {
 }
 
 class RecipeListInitial extends RecipeListState {}
+
+class RecipeListLoadingState extends RecipeListState {}
+
+class RecipeListLoadedState extends RecipeListState {}
+
+class RecipeListEmptyState extends RecipeListState {}
+
+class RecipeListAddIngredientState extends RecipeListState {}
+
+class RecipeListDeleteIngredientState extends RecipeListState {}
+
+class RecipeListErrorState extends RecipeListState {}

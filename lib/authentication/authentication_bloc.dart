@@ -8,14 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final AuthenticationRepository authenticationRepository =
-      AuthenticationRepository();
-  final Future<SharedPreferences> _userPreferences =
-      SharedPreferences.getInstance();
-
-  // User user = User(id: "", nickname: "", email: "", password: "");
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+  final AuthenticationRepository authenticationRepository = AuthenticationRepository();
 
   AuthenticationBloc() : super(AutoConnexionAttemptState()) {
     on<AutoConnexionAttemptEvent>((event, emit) async {
@@ -34,17 +28,10 @@ class AuthenticationBloc
     on<LoginEvent>((event, emit) async {
       emit(ConnexionLoadingState());
       try {
-        print('try login');
-        print(event.email);
-        print(event.password);
-        var response =
-            await authenticationRepository.login(event.email, event.password);
+        var response = await authenticationRepository.login(event.email, event.password);
         if (response["status"] == true) {
-          print("emit bon");
           emit(AuthenticationSuccessState());
         } else {
-          print("emit pas bon");
-
           emit(LoginState());
         }
       } catch (e) {
@@ -54,12 +41,7 @@ class AuthenticationBloc
 
     on<RegisterEvent>((event, emit) async {
       try {
-        print('try register');
-        print(event.nickname);
-        print(event.email);
-        print(event.password);
-        var response = await authenticationRepository.register(
-            event.nickname, event.email, event.password);
+        var response = await authenticationRepository.register(event.nickname, event.email, event.password);
         if (response["status"] == true) {
           emit(AuthenticationSuccessState());
         } else {
@@ -74,9 +56,7 @@ class AuthenticationBloc
       emit(ConnexionLoadingState());
     });
 
-    on<AuthenticationSuccessEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<AuthenticationSuccessEvent>((event, emit) {});
 
     on<LogoutEvent>((event, emit) {
       authenticationRepository.logout(emit);

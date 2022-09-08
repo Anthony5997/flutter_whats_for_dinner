@@ -6,8 +6,6 @@ part 'recipe_state.dart';
 
 class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   RecipeBloc() : super(RecipeInitial()) {
-    on<RecipeEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<RecipeEvent>((event, emit) {});
   }
 }

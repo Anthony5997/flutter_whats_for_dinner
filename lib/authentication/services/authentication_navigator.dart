@@ -11,16 +11,14 @@ class AuthenticationNavigator extends StatefulWidget {
   const AuthenticationNavigator({Key? key}) : super(key: key);
 
   @override
-  State<AuthenticationNavigator> createState() =>
-      _AuthenticationNavigatorState();
+  State<AuthenticationNavigator> createState() => _AuthenticationNavigatorState();
 }
 
 class _AuthenticationNavigatorState extends State<AuthenticationNavigator> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthenticationBloc>(
-      create: (context) =>
-          AuthenticationBloc()..add(AutoConnexionAttemptEvent()),
+      create: (context) => AuthenticationBloc()..add(AutoConnexionAttemptEvent()),
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           print("NAVIGATOR STATE");
@@ -29,19 +27,11 @@ class _AuthenticationNavigatorState extends State<AuthenticationNavigator> {
           return Navigator(
             pages: [
               // Show login
-              if (state is AutoConnexionAttemptState)
-                MaterialPage(child: LoadingScreen()),
-              if (state is ConnexionLoadingState)
-                MaterialPage(child: LoadingScreen()),
-              if (state is LoginState)
-                MaterialPage(
-                    child: LoginView(formKey: GlobalKey<FormBuilderState>())),
-              if (state is RegisterState)
-                MaterialPage(
-                    child:
-                        RegisterView(formKey: GlobalKey<FormBuilderState>())),
-              if (state is AuthenticationSuccessState)
-                MaterialPage(child: SessionNavigator()),
+              if (state is AutoConnexionAttemptState) const MaterialPage(child: LoadingScreen()),
+              if (state is ConnexionLoadingState) const MaterialPage(child: LoadingScreen()),
+              if (state is LoginState) MaterialPage(child: LoginView(formKey: GlobalKey<FormBuilderState>())),
+              if (state is RegisterState) MaterialPage(child: RegisterView(formKey: GlobalKey<FormBuilderState>())),
+              if (state is AuthenticationSuccessState) MaterialPage(child: SessionNavigator()),
               if (state is LogoutState)
                 MaterialPage(
                     child: LoginView(

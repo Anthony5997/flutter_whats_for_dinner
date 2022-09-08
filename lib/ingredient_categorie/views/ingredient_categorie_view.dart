@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
-import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categorie_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_by_categorie.dart';
-import 'package:flutter_whats_for_dinner/models/IngredientCategory.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class IngredientCategorieView extends StatelessWidget {
+  const IngredientCategorieView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     IngredientCategoryRepository ingredientCategoryRepository = IngredientCategoryRepository();
@@ -67,7 +65,7 @@ class IngredientCategorieView extends StatelessWidget {
                       // ),
                       );
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(
                       backgroundColor: Color(0xFFfffdf7),
                       color: Color(0xFFCA2525),

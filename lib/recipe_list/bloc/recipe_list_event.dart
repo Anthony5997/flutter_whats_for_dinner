@@ -6,3 +6,13 @@ abstract class RecipeListEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class RecipeListEventInitial extends RecipeListEvent {}
+
+class RecipeListLoadingEvent extends RecipeListEvent {}
+
+class RecipeListLoadedEvent extends RecipeListEvent {}
+
+class RecipeListAddIngredientEvent extends RecipeListEvent {}
+
+class RecipeListDeleteIngredientEvent extends RecipeListEvent {}

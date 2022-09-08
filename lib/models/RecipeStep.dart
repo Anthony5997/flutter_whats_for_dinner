@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,8 +17,7 @@ class RecipeStep extends Equatable {
     required this.step,
   });
 
-  factory RecipeStep.fromJson(Map<String, dynamic> json) =>
-      _$RecipeStepFromJson(json);
+  factory RecipeStep.fromJson(Map<String, dynamic> json) => _$RecipeStepFromJson(json);
 
   /// Connect the generated [_$RecipeStepToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$RecipeStepToJson(this);

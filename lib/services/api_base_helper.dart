@@ -7,11 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
-  final Future<SharedPreferences> _userPreferences =
-      SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
 
   Future<dynamic> get(String url) async {
-    var responseJson;
+    dynamic responseJson;
+    print('$_baseUrl$url');
 
     try {
       final response = await http.get(Uri.parse(_baseUrl + url));
@@ -24,13 +24,12 @@ class ApiBaseHelper {
   }
 
   Future<dynamic> getAuth(String url) async {
-    var responseJson;
+    dynamic responseJson;
     final SharedPreferences prefs = await _userPreferences;
-    var token = await prefs.get("token");
+    var token = prefs.get("token");
 
     try {
       print('$_baseUrl$url');
-
       final response = await http.get(Uri.parse(_baseUrl + url), headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -47,10 +46,10 @@ class ApiBaseHelper {
 
 /* NE FONCTIONNE QUE POUR L'AJOUT AU FRIDGE POUR L INSTANT */
   Future<dynamic> postAuth(String url, array) async {
-    var responseJson;
+    dynamic responseJson;
 
     final SharedPreferences prefs = await _userPreferences;
-    var token = await prefs.get("token");
+    var token = prefs.get("token");
     try {
       final response = await http.post(
         Uri.parse(_baseUrl + url),
@@ -72,22 +71,52 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> getAuthParametre(String url) async {
-    var responseJson;
+  Future<dynamic> postAuthAddIngredientInFridge(String url, array) async {
+    dynamic responseJson;
     final SharedPreferences prefs = await _userPreferences;
-    var token = await prefs.get("token");
-    // var id = await prefs.get("id");
-
+    var token = prefs.get("token");
     try {
-      print('$_baseUrl$url');
-      print(token);
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, String>{
+          'fridgeId': array['fridgeId'].toString(),
+          'ingredientId': array['ingredientId'].toString(),
+          'quantity': array['quantity'].toString(),
+          'unit': array['unit'].toString(),
+        }),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
 
-      final response = await http.get(Uri.parse(_baseUrl + url), headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        'Access-Control_Allow_Origin': '*',
-      });
+  Future<dynamic> postAuthDeleteIngredientInFridge(String url, array) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'fridgeId': array['fridgeId'].toString(),
+            'ingredientId': array['ingredientId'].toString(),
+          },
+        ),
+      );
 
       responseJson = _returnResponse(response);
     } on SocketException {
@@ -96,15 +125,31 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> postLogin(email, password) async {
-    var responseJson;
+  Future<dynamic> getAuthParametre(String url) async {
+    dynamic responseJson;
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+
     try {
-      print("LOGIN METHOD");
+      final response = await http.get(
+        Uri.parse(_baseUrl + url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+          'Access-Control_Allow_Origin': '*',
+        },
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
 
-      print(email);
-      print(password);
-      print("===================================");
-
+  Future<dynamic> postLogin(email, password) async {
+    dynamic responseJson;
+    try {
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/login"),
         headers: <String, String>{
@@ -123,24 +168,20 @@ class ApiBaseHelper {
   }
 
   Future<dynamic> postRegister(name, email, password) async {
-    var responseJson;
+    dynamic responseJson;
     try {
-      print("REGISTER METHOD");
-      print(name);
-      print(email);
-      print(password);
-      print("===================================");
-
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/register"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(<String, String>{
-          'nickname': name,
-          'email': email,
-          'password': password,
-        }),
+        body: jsonEncode(
+          <String, String>{
+            'nickname': name,
+            'email': email,
+            'password': password,
+          },
+        ),
       );
       responseJson = _returnResponse(response);
     } on SocketException {
@@ -152,10 +193,12 @@ class ApiBaseHelper {
   dynamic _returnResponse(http.Response response) {
     print("statusCode");
     print(response.statusCode);
-
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
+        print("responseJson");
+        print(responseJson);
+
         return responseJson;
       case 400:
         throw BadRequestException(response.body.toString());

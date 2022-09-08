@@ -1,16 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/models/Fridge.dart';
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_whats_for_dinner/services/app_exception.dart';
-import 'package:http/http.dart' as http;
 
 class FridgeRepository {
   final ApiBaseHelper _helper = ApiBaseHelper();
-  final Future<SharedPreferences> _userPreferences =
-      SharedPreferences.getInstance();
 
   Future<Fridge> getUserFridge() async {
     final response = await _helper.getAuthParametre("/fridge");
@@ -21,9 +14,21 @@ class FridgeRepository {
       ingredients.add(Ingredient.fromJson(result));
     });
 
-    Fridge listFridge =
-        Fridge(id: response["results"]["id"], ingredients_list: ingredients);
-
+    Fridge listFridge = Fridge(id: response["results"]["id"], ingredients_list: ingredients);
     return listFridge;
+  }
+
+  Future<Fridge> addIngredientFridge(array) async {
+    await _helper.postAuthAddIngredientInFridge("/fridge/addIngredient", array[0]);
+    Fridge fridge = await getUserFridge();
+
+    return fridge;
+  }
+
+  Future<Fridge> deleteIngredientFridge(array) async {
+    await _helper.postAuthDeleteIngredientInFridge("/fridge/deleteIngredient", array[0]);
+    Fridge fridge = await getUserFridge();
+
+    return fridge;
   }
 }

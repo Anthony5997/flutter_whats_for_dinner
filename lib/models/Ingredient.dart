@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Ingredient.g.dart';
@@ -14,22 +15,10 @@ class Ingredient {
   int? unit_id;
   String? unit_name;
 
-  Ingredient(
-      {required this.id,
-      required this.name,
-      required this.image,
-      required this.category_id,
-      this.category_name,
-      this.quantity,
-      this.unit_id,
-      this.unit_name});
+  Ingredient({required this.id, required this.name, required this.image, required this.category_id, this.category_name, this.quantity, this.unit_id, this.unit_name});
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) =>
-      _$IngredientFromJson(json);
+  factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
 
   /// Connect the generated [_$IngredientToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$IngredientToJson(this);
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

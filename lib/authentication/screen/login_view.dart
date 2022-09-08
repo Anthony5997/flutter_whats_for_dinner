@@ -28,49 +28,36 @@ class LoginView extends StatelessWidget {
           padding: const EdgeInsets.only(top: 60.0),
           child: FormBuilder(
             key: formKey,
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/logo-genial.png',
-                        height: 190,
-                      ),
-                      const Text(
-                        "What's For Dinner",
-                        style:
-                            TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
-                      ),
-                      const SizedBox(height: 30),
-                      CustomEmailField(),
-                      const SizedBox(height: 30),
-                      CustomPasswordField(),
-                      const SizedBox(height: 30),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState?.validate() == true) {
-                              formKey.currentState!.save();
-                              print("FORM INPUT LOGIN");
-                              print(formKey.currentState?.value['email']);
-                              print(formKey.currentState?.value['password']);
-                              print("=========================");
-
-                              context.read<AuthenticationBloc>().add(LoginEvent(
-                                  email: formKey.currentState?.value['email'],
-                                  password:
-                                      formKey.currentState?.value['password']));
-                            }
-                          },
-                          child: const Text('Se connecter'),
-                        ),
-                      ),
-                      _showSignUpButton(context),
-                    ]),
-              ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                Image.asset(
+                  'assets/images/logo-genial.png',
+                  height: 190,
+                ),
+                const Text(
+                  "What's For Dinner",
+                  style: TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
+                ),
+                const SizedBox(height: 30),
+                CustomEmailField(),
+                const SizedBox(height: 30),
+                CustomPasswordField(),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState?.validate() == true) {
+                        formKey.currentState!.save();
+                        context.read<AuthenticationBloc>().add(LoginEvent(email: formKey.currentState?.value['email'], password: formKey.currentState?.value['password']));
+                      }
+                    },
+                    child: const Text('Se connecter'),
+                  ),
+                ),
+                _showSignUpButton(context),
+              ]),
             ),
           ),
         ),
@@ -81,16 +68,10 @@ class LoginView extends StatelessWidget {
   Widget _showSignUpButton(BuildContext context) {
     return SafeArea(
       child: TextButton(
-          child: const Text('Vous possedez déjà un compte ? Connectez vous.',
-              textAlign: TextAlign.center),
+          child: const Text('Vous possedez déjà un compte ? Connectez vous.', textAlign: TextAlign.center),
           onPressed: () {
-            context.read<AuthenticationBloc>()..add(ShowRegisterEvent());
+            context.read<AuthenticationBloc>().add(ShowRegisterEvent());
           }),
     );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(content: Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

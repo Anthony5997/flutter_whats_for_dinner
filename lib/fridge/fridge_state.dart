@@ -18,4 +18,8 @@ class FridgeLoadedState extends FridgeState {
 
 class FridgeEmptyState extends FridgeState {}
 
+class FridgeAddIngredientState extends FridgeState {}
+
+class FridgeDeleteIngredientState extends FridgeState {}
+
 class FridgeErrorState extends FridgeState {}

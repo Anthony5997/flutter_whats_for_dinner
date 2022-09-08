@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
-import 'package:flutter_whats_for_dinner/models/User.dart';
 import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,35 +8,24 @@ class AuthenticationRepository {
   final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
 
   Future<dynamic> login(username, password) async {
-    print('attempting login');
     final response = await _helper.postLogin(username, password);
-    print("response in login function");
-    print(response);
     await setUserSharedPreferences(response);
 
     return response;
   }
 
   Future<dynamic> register(username, email, password) async {
-    print('attempting register');
     final response = await _helper.postRegister(username, email, password);
-    print("response in register function");
-    print(response);
     await setUserSharedPreferences(response);
     return response;
   }
 
   Future<dynamic> attemptAutoLogin(Emitter emit) async {
     final SharedPreferences pref = await _userPreferences;
-    print("JE TENTE DE ME CO");
-    print(pref.getBool("logged"));
     // await getUserSharedPreferences(pref);
-    if (await pref.getBool("logged") == null) {
-      print("AUTO CONNEXION ECHOUE");
+    if (pref.getBool("logged") == null) {
       emit(LoginState());
     } else {
-      print("AUTO CONNEXION REUSSIS");
-
       emit(AuthenticationSuccessState());
     }
   }
@@ -59,21 +47,6 @@ class AuthenticationRepository {
 
   Future<dynamic> getUserSharedPreferences() async {
     SharedPreferences pref = await _userPreferences;
-    // String id = await pref.getString("id")!;
-    // String nickname = await pref.getString("nickname")!;
-    // String email = await pref.getString("email")!;
-    // String token = await pref.getString("token")!;
     return pref;
-  }
-
-  Future<dynamic> getUser() async {
-    var pref = await _userPreferences;
-    String id = await pref.getString("id")!;
-    String nickname = await pref.getString("nickname")!;
-    String email = await pref.getString("email")!;
-    String token = await pref.getString("token")!;
-
-    User user = await User(id: id, nickname: nickname, email: email, token: token);
-    return user;
   }
 }

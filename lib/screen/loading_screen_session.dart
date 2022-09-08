@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 
 class LoadingScreenSession extends StatelessWidget {
+  const LoadingScreenSession({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
