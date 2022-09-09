@@ -23,7 +23,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         emit(SessionInitial());
       }
       if (event.index == 1) {
-        emit(SessionIngredientCategoryState());
+        emit(SessionRecipeListState());
       }
       if (event.index == 2) {
         emit(SessionLoadingState());

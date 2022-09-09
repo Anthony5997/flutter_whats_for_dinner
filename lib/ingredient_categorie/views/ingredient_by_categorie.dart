@@ -16,26 +16,30 @@ class IngredientByCategorieScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 35,
-        title: const Text(
-          "Ajouter un ingredient",
-          style: TextStyle(fontSize: 16),
-        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: ingredient.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.red,
-                child: Text(ingredient[index]["id"].toString()),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: ingredient.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Color.fromRGBO(120, 120, 120, 0),
+                      child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${ingredient[index]["image"]}')),
+                    ),
+                    title: Text(ingredient[index]["name"]),
+                    subtitle: Text(ingredient[index]["name"]),
+                    trailing: AddIngredientButtonDialog(ingredient[index]["id"]),
+                  );
+                },
               ),
-              title: Text(ingredient[index]["name"]),
-              subtitle: Text(ingredient[index]["name"]),
-              trailing: AddIngredientButtonDialog(ingredient[index]["id"]),
-            );
-          },
+            ],
+          ),
         ),
       ),
     );
@@ -131,6 +135,17 @@ Future<void> _showMyDialog(context, ingredientId) async {
 
                 context.read<FridgeBloc>().add(FridgeAddIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: ingredientId));
                 Navigator.pop(context, 'Ajouter');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.green,
+                    content: Text(
+                      "Ajout effectuer",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                );
               }
             },
             child: const Text('Ajouter'),

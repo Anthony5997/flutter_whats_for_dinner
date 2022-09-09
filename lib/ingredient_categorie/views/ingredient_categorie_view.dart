@@ -26,44 +26,47 @@ class IngredientCategorieView extends StatelessWidget {
                 if (state is IngredientCategorieLoadedState) {
                   print(state.ingredientCat);
                   return Expanded(
-                      child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500, childAspectRatio: 3 / 2, crossAxisSpacing: 20, mainAxisSpacing: 20),
-                    itemCount: state.ingredientCat.length,
-                    itemBuilder: (BuildContext context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(border: Border.all(width: 5, color: Colors.red), borderRadius: BorderRadius.circular(15)),
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 20),
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500, childAspectRatio: 3 / 2, crossAxisSpacing: 20, mainAxisSpacing: 20),
+                      itemCount: state.ingredientCat.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return TextButton(
+                          onPressed: () async {
+                            print(state.ingredientCat[index]['id'].toString());
+                            var ingredientCategorieList = await ingredientCategoryRepository.getById(state.ingredientCat[index]['id'].toString());
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList["results"]),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(border: Border.all(width: 2, color: Colors.red), borderRadius: BorderRadius.circular(15)),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    child: Image.network(
+                                      Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/categories/${state.ingredientCat[index]['image']}'),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
+                                    width: 250,
+                                    height: 250,
+                                  ),
+                                  Text(state.ingredientCat[index]['name']),
+                                ],
+                              ),
                             ),
-                            onPressed: () async {
-                              print(state.ingredientCat[index]['id'].toString());
-                              var ingredientCategorieList = await ingredientCategoryRepository.getById(state.ingredientCat[index]['id'].toString());
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList["results"]),
-                                ),
-                              );
-                            },
-                            child: Text(state.ingredientCat[index]['name']),
                           ),
-                        ),
-                      );
-                    },
-                  )
-
-                      // ListView(
-                      //   children: [
-                      //     for (var i = 0; i < state.ingredientCat['total_results']; i++)
-
-                      //   ],
-                      // ),
-                      );
+                        );
+                      },
+                    ),
+                  );
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(

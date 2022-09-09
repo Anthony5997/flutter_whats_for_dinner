@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart
 import 'package:flutter_whats_for_dinner/widgets/inputs/email_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/nickname_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/password_field.dart';
+import 'package:flutter_whats_for_dinner/widgets/messageErreur.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({Key? key, required this.formKey, this.error}) : super(key: key);
@@ -14,6 +15,8 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("error");
+    print(error);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
@@ -39,6 +42,8 @@ class RegisterView extends StatelessWidget {
                   "What's For Dinner",
                   style: TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
                 ),
+                const SizedBox(height: 30),
+                if (error != null) MessageErreur(messageErreur: error ?? ''),
                 const SizedBox(height: 30),
                 CustomNicknameField(),
                 const SizedBox(height: 20),

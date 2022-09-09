@@ -7,8 +7,6 @@ part 'recipe_list_state.dart';
 class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
   RecipeListBloc() : super(RecipeListInitial()) {
     on<RecipeListEvent>((event, emit) {});
-
-    on<RecipeListEvent>((event, emit) {});
     on<RecipeListLoadedEvent>((event, emit) {
       try {
         emit(RecipeListLoadedState());

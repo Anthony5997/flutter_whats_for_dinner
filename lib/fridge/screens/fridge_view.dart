@@ -34,19 +34,28 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         itemCount: state.fridge.ingredients_list.length,
                         itemBuilder: (context, index) => Card(
                           key: ValueKey(state.fridge.ingredients_list[index].id),
-                          color: Colors.red[900],
-                          elevation: 4,
+                          color: Colors.grey[300],
+                          elevation: 8,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color.fromARGB(255, 112, 29, 23),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+                          ),
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                             leading: Container(
                               padding: EdgeInsets.only(right: 12.0),
                               decoration: new BoxDecoration(border: new Border(right: new BorderSide(width: 1.0, color: Colors.white24))),
-                              child: Icon(Icons.autorenew, color: Colors.white),
+                              child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${state.fridge.ingredients_list[index].image}')),
+
+                              //  Icon(Icons.autorenew, color: Colors.white),
                             ),
                             title: Text(
                               state.fridge.ingredients_list[index].name,
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.bold),
                             ),
                             // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
@@ -54,12 +63,12 @@ class _FridgeScreenState extends State<FridgeScreen> {
                               children: <Widget>[
                                 Icon(
                                   Icons.linear_scale,
-                                  color: Colors.yellowAccent,
+                                  color: Colors.red[900],
                                 ),
                                 Text(
                                   state.fridge.ingredients_list[index].quantity.toString() + state.fridge.ingredients_list[index].unit_name.toString(),
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.red[900],
                                   ),
                                 )
                               ],
@@ -67,13 +76,24 @@ class _FridgeScreenState extends State<FridgeScreen> {
                             trailing: IconButton(
                               icon: const Icon(
                                 Icons.delete_forever,
-                                color: Colors.white,
+                                color: Colors.red,
                                 size: 26,
                               ),
                               tooltip: 'Supprimer du frigo',
                               onPressed: () {
                                 print("Ingrédient supprimé : ${state.fridge.ingredients_list[index].id}");
                                 context.read<FridgeBloc>().add(FridgeDeleteIngredientEvent(ingredientId: state.fridge.ingredients_list[index].id));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      "Suppression effectuée",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -100,11 +120,14 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   }
                 },
               ),
-              ElevatedButton(
-                child: const Text('Ajouter ingrédient'),
-                onPressed: () {
-                  BlocProvider.of<SessionBloc>(context).add(SessionIngredientCategoryEvent());
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: ElevatedButton(
+                  child: const Text('Ajouter ingrédient'),
+                  onPressed: () {
+                    BlocProvider.of<SessionBloc>(context).add(SessionIngredientCategoryEvent());
+                  },
+                ),
               ),
             ],
           ),

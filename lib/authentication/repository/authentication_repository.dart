@@ -9,14 +9,18 @@ class AuthenticationRepository {
 
   Future<dynamic> login(username, password) async {
     final response = await _helper.postLogin(username, password);
-    await setUserSharedPreferences(response);
-
+    if (response["status"] == true) {
+      await setUserSharedPreferences(response);
+    }
     return response;
   }
 
   Future<dynamic> register(username, email, password) async {
     final response = await _helper.postRegister(username, email, password);
-    await setUserSharedPreferences(response);
+
+    if (response["status"] == true) {
+      await setUserSharedPreferences(response);
+    }
     return response;
   }
 

@@ -32,7 +32,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         if (response["status"] == true) {
           emit(AuthenticationSuccessState());
         } else {
-          emit(LoginState());
+          emit(LoginState(message: response["message"]));
         }
       } catch (e) {
         print('catch');
@@ -40,12 +40,16 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     });
 
     on<RegisterEvent>((event, emit) async {
+      emit(ConnexionLoadingState());
+
       try {
         var response = await authenticationRepository.register(event.nickname, event.email, event.password);
         if (response["status"] == true) {
           emit(AuthenticationSuccessState());
         } else {
-          emit(RegisterState());
+          print("response");
+          print(response['errors']);
+          emit(RegisterState(message: response["message"]));
         }
       } catch (e) {
         print('catch');

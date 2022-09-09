@@ -11,9 +11,15 @@ class AuthenticationInitialState extends AuthenticationState {}
 
 class AutoConnexionAttemptState extends AuthenticationState {}
 
-class LoginState extends AuthenticationState {}
+class LoginState extends AuthenticationState {
+  String? message;
+  LoginState({this.message});
+}
 
-class RegisterState extends AuthenticationState {}
+class RegisterState extends AuthenticationState {
+  String? message;
+  RegisterState({this.message});
+}
 
 class AuthenticationSuccessState extends AuthenticationState {}
 

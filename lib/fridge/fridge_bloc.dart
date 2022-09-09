@@ -20,7 +20,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
       try {
         Fridge fridge = await fridgeRepository.getUserFridge();
 
-        fridge = await fridgeRepository.addIngredientFridge([
+        var fridgeResponse = await fridgeRepository.addIngredientFridge([
           {
             "fridgeId": fridge.id,
             "ingredientId": event.ingredientId,
@@ -28,8 +28,10 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
             "unit": event.unit,
           }
         ]);
+        print("fridge ICI");
+        print(fridgeResponse["response"]);
 
-        emit(FridgeLoadedState(fridge));
+        emit(FridgeLoadedState(fridgeResponse["fridge"], status: fridgeResponse["response"]));
       } catch (e) {
         emit(FridgeErrorState());
       }

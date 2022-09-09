@@ -5,14 +5,14 @@ import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 
-class RecipeListScreen extends StatefulWidget {
-  const RecipeListScreen({Key? key}) : super(key: key);
+class RecipeListView extends StatefulWidget {
+  const RecipeListView({Key? key}) : super(key: key);
 
   @override
-  State<RecipeListScreen> createState() => _RecipeListScreenState();
+  State<RecipeListView> createState() => _RecipeListViewState();
 }
 
-class _RecipeListScreenState extends State<RecipeListScreen> {
+class _RecipeListViewState extends State<RecipeListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +28,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
               BlocBuilder<RecipeListBloc, RecipeListState>(
                 builder: (context, state) {
                   print("STATE");
+                  print(state);
                   if (state is RecipeListLoadedState) {
                     return Expanded(
                       child: Container(

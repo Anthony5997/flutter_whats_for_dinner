@@ -29,8 +29,18 @@ class _AuthenticationNavigatorState extends State<AuthenticationNavigator> {
               // Show login
               if (state is AutoConnexionAttemptState) const MaterialPage(child: LoadingScreen()),
               if (state is ConnexionLoadingState) const MaterialPage(child: LoadingScreen()),
-              if (state is LoginState) MaterialPage(child: LoginView(formKey: GlobalKey<FormBuilderState>())),
-              if (state is RegisterState) MaterialPage(child: RegisterView(formKey: GlobalKey<FormBuilderState>())),
+              if (state is LoginState)
+                MaterialPage(
+                    child: LoginView(
+                  formKey: GlobalKey<FormBuilderState>(),
+                  error: state.message,
+                )),
+              if (state is RegisterState)
+                MaterialPage(
+                    child: RegisterView(
+                  formKey: GlobalKey<FormBuilderState>(),
+                  error: state.message,
+                )),
               if (state is AuthenticationSuccessState) MaterialPage(child: SessionNavigator()),
               if (state is LogoutState)
                 MaterialPage(
