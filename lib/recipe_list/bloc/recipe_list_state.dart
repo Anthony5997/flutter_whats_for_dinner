@@ -11,7 +11,10 @@ class RecipeListInitial extends RecipeListState {}
 
 class RecipeListLoadingState extends RecipeListState {}
 
-class RecipeListLoadedState extends RecipeListState {}
+class RecipeListLoadedState extends RecipeListState {
+  dynamic recipeResult;
+  RecipeListLoadedState(this.recipeResult);
+}
 
 class RecipeListEmptyState extends RecipeListState {}
 

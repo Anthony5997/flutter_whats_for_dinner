@@ -18,7 +18,7 @@ class _RecipeListViewState extends State<RecipeListView> {
     return Scaffold(
       endDrawer: CustomBottomNavigationBar(),
       body: BlocProvider<RecipeListBloc>(
-        create: (context) => RecipeListBloc()..add(RecipeListLoadingEvent()),
+        create: (context) => RecipeListBloc()..add(RecipeListEventInitial()),
         child: Padding(
           padding: const EdgeInsets.all(80.0),
           child: Column(
@@ -39,19 +39,63 @@ class _RecipeListViewState extends State<RecipeListView> {
                             Text("La il y aura des recettes chargé"),
                             Text("La il y aura des recettes chargé"),
                             Text("La il y aura des recettes chargé"),
+                            ElevatedButton(
+                              child: const Text('Recherchez à nouveau !'),
+                              onPressed: () {
+                                BlocProvider.of<RecipeListBloc>(context)
+                                    .add(RecipeListLoadingEvent());
+                              },
+                            ),
                           ],
                         )),
                       ),
                     );
-                  } else if (state is RecipeListEmptyState) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
-                        child: Text(
-                          "Aucune recette pour l'instant !",
-                          style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                  } else if (state is RecipeListInitial) {
+                    return Column(
+                      children: [
+                        const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 48.0, horizontal: 12),
+                            child: Text(
+                              "Aucune recette pour l'instant !",
+                              style: TextStyle(
+                                  fontFamily: "LemonDays", fontSize: 24),
+                            ),
+                          ),
                         ),
-                      ),
+                        ElevatedButton(
+                          child: const Text('Recherchez pour moi !'),
+                          onPressed: () {
+                            print("taped");
+                            BlocProvider.of<RecipeListBloc>(context)
+                                .add(RecipeListLoadingEvent());
+                          },
+                        ),
+                      ],
+                    );
+                  } else if (state is RecipeListEmptyState) {
+                    return Column(
+                      children: [
+                        const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 48.0, horizontal: 12),
+                            child: Text(
+                              "Aucune recette pour l'instant !",
+                              style: TextStyle(
+                                  fontFamily: "LemonDays", fontSize: 24),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          child: const Text('Recherchez pour moi !'),
+                          onPressed: () {
+                            BlocProvider.of<RecipeListBloc>(context)
+                                .add(RecipeListLoadingEvent());
+                          },
+                        ),
+                      ],
                     );
                   } else {
                     return const Center(
@@ -62,10 +106,6 @@ class _RecipeListViewState extends State<RecipeListView> {
                     );
                   }
                 },
-              ),
-              ElevatedButton(
-                child: const Text('Recherchez pour moi !'),
-                onPressed: () {},
               ),
             ],
           ),
