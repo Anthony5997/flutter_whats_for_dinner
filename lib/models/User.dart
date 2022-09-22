@@ -1,12 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'User.g.dart';
 
 @JsonSerializable()
-class User extends Equatable {
+class User {
   final String id;
   final String nickname;
   final String email;
@@ -31,7 +30,4 @@ class User extends Equatable {
 
   /// Connect the generated [_$UserToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

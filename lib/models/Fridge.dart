@@ -23,7 +23,4 @@ class Fridge {
 
   /// Connect the generated [_$FridgeToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$FridgeToJson(this);
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

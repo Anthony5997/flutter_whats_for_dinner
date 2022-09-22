@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/models/RecipeStep.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -8,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'Recipe.g.dart';
 
 @JsonSerializable()
-class Recipe extends Equatable {
+class Recipe {
   final String id;
   final String title;
   final String summary;
@@ -49,7 +48,4 @@ class Recipe extends Equatable {
 
   /// Connect the generated [_$RecipeToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$RecipeToJson(this);
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }
