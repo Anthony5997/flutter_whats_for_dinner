@@ -20,7 +20,9 @@ class Recipe {
   final bool vegan;
   final bool gluten_free;
   final bool dairy_free;
+  final int pertinence;
   final List<Ingredient> ingredients_list;
+  final List<Ingredient> ingredients_missing_list;
   final List<RecipeStep> recipe_steps;
   final DateTime? created_at;
   final DateTime? updated_at;
@@ -38,7 +40,9 @@ class Recipe {
     required this.vegan,
     required this.gluten_free,
     required this.dairy_free,
+    required this.pertinence,
     required this.ingredients_list,
+    required this.ingredients_missing_list,
     required this.recipe_steps,
     this.created_at,
     this.updated_at,

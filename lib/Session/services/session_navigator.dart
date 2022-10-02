@@ -24,8 +24,6 @@ class _SessionNavigatorState extends State<SessionNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Bienvenu ")),
-      endDrawer: CustomDrawer(),
       body: BlocProvider<SessionBloc>(
         create: (context) => SessionBloc()..add(SessionPageSelectedEvent(widget._index)),
         child: BlocBuilder<SessionBloc, SessionState>(

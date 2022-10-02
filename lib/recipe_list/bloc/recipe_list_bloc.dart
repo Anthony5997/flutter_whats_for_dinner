@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_whats_for_dinner/models/Recipe.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 
 part 'recipe_list_event.dart';
@@ -24,5 +25,21 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
         emit(RecipeListEmptyState());
       }
     });
+
+    // on<RecipeDetailLoadingEvent>((event, emit) async {
+    //   emit(RecipeDetailLoadingState());
+
+    //   try {
+    //     var recipeResult = await recipeListRepository.getOne(event.id);
+    //     emit(RecipeDetailLoadedState(recipeResult));
+    //   } catch (e) {
+    //     emit(RecipeListEmptyState());
+    //   }
+    // });
+
+    // on<RecipeDetailLoadedEvent>((event, emit) async {
+    //   // var recipeResult = await recipeListRepository.getOne(event.id);
+    //   // emit(RecipeDetailLoadedState(recipeResult));
+    // });
   }
 }

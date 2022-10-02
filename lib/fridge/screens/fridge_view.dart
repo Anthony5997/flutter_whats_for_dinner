@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
+import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 
 class FridgeScreen extends StatefulWidget {
   const FridgeScreen({Key? key}) : super(key: key);
@@ -15,11 +16,12 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: CustomBottomNavigationBar(),
+      appBar: AppBar(title: Text("Mon Frigo ")),
+      endDrawer: CustomDrawer(),
       body: BlocProvider<FridgeBloc>(
         create: (context) => FridgeBloc()..add(FridgeLoadingEvent()),
         child: Padding(
-          padding: const EdgeInsets.all(80.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,7 +64,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                             subtitle: Row(
                               children: <Widget>[
                                 Icon(
-                                  Icons.linear_scale,
+                                  Icons.public_rounded,
                                   color: Colors.red[900],
                                 ),
                                 Text(

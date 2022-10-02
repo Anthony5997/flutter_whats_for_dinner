@@ -6,7 +6,7 @@ import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
 class RecipeListRepository {
   final ApiBaseHelper _helper = ApiBaseHelper();
 
-  Future<dynamic> get() async {
+  Future<List<Recipe>> get() async {
     final response = await _helper.getAuth("/recipe/potentialRecipes");
 
     List<Recipe> listRecipe = [];
@@ -14,10 +14,17 @@ class RecipeListRepository {
     response["results"].forEach((recipe) {
       listRecipe.add(Recipe.fromJson(recipe));
     });
-    print("LIST RECIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIPE");
-    print(listRecipe);
-
     return listRecipe;
+  }
+
+  Future<Recipe> getOne(id) async {
+    final response = await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
+    print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
+    print(response);
+
+    Recipe recipe = Recipe.fromJson(response);
+
+    return recipe;
   }
 }
 

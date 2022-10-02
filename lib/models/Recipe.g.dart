@@ -19,9 +19,14 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
       vegan: json['vegan'] as bool,
       gluten_free: json['gluten_free'] as bool,
       dairy_free: json['dairy_free'] as bool,
+      pertinence: json['pertinence'] as int,
       ingredients_list: (json['ingredients_list'] as List<dynamic>)
           .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
           .toList(),
+      ingredients_missing_list:
+          (json['ingredients_missing_list'] as List<dynamic>)
+              .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+              .toList(),
       recipe_steps: (json['recipe_steps'] as List<dynamic>)
           .map((e) => RecipeStep.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -46,7 +51,9 @@ Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
       'vegan': instance.vegan,
       'gluten_free': instance.gluten_free,
       'dairy_free': instance.dairy_free,
+      'pertinence': instance.pertinence,
       'ingredients_list': instance.ingredients_list,
+      'ingredients_missing_list': instance.ingredients_missing_list,
       'recipe_steps': instance.recipe_steps,
       'created_at': instance.created_at?.toIso8601String(),
       'updated_at': instance.updated_at?.toIso8601String(),

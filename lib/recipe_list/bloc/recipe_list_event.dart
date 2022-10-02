@@ -13,6 +13,10 @@ class RecipeListLoadingEvent extends RecipeListEvent {}
 
 class RecipeListLoadedEvent extends RecipeListEvent {}
 
+class RecipeDetailLoadedEvent extends RecipeListEvent {}
+
+class RecipeDetailLoadingEvent extends RecipeListEvent {}
+
 class RecipeListAddIngredientEvent extends RecipeListEvent {}
 
 class RecipeListDeleteIngredientEvent extends RecipeListEvent {}

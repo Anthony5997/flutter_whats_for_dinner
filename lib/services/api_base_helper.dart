@@ -44,7 +44,6 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-/* NE FONCTIONNE QUE POUR L'AJOUT AU FRIDGE POUR L INSTANT */
   Future<dynamic> postAuth(String url, array) async {
     dynamic responseJson;
 
@@ -118,6 +117,34 @@ class ApiBaseHelper {
         ),
       );
 
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> postAuthRecipeDetail(String url, id) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      print("route");
+      print(_baseUrl + url);
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'recipeId': id,
+          },
+        ),
+      );
       responseJson = _returnResponse(response);
     } on SocketException {
       throw Exception('Failed to load');
