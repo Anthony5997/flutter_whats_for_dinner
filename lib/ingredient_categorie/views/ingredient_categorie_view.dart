@@ -4,6 +4,7 @@ import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categor
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_by_categorie.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
+import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 
 class IngredientCategorieView extends StatelessWidget {
   const IngredientCategorieView({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class IngredientCategorieView extends StatelessWidget {
   Widget build(BuildContext context) {
     IngredientCategoryRepository ingredientCategoryRepository = IngredientCategoryRepository();
     return Scaffold(
-      endDrawer: CustomBottomNavigationBar(),
+      endDrawer: CustomDrawer(),
       body: BlocProvider<IngredientCategorieBloc>(
         create: (context) => IngredientCategorieBloc()..add(IngredientCategorieLoadingEvent()),
         child: Column(
