@@ -8,7 +8,8 @@ class RecipeListRepository {
 
   Future<List<Recipe>> get() async {
     final response = await _helper.getAuth("/recipe/potentialRecipes");
-
+    print("response");
+    print(response);
     List<Recipe> listRecipe = [];
 
     response["results"].forEach((recipe) {

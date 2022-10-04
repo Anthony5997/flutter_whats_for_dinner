@@ -20,8 +20,12 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
 
       try {
         var recipeResult = await recipeListRepository.get();
+        print("RECIPE PASSER");
+
+        print(recipeResult);
         emit(RecipeListLoadedState(recipeResult));
       } catch (e) {
+        print("CATCH RECIPE");
         emit(RecipeListEmptyState());
       }
     });

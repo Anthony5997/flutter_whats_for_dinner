@@ -42,10 +42,14 @@ class AuthenticationRepository {
 
   Future<dynamic> setUserSharedPreferences(payload) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
+
+    print("payload IMPORTANT");
+    print(payload);
     await pref.setString("id", payload['user']['id']);
     await pref.setString("nickname", payload['user']['nickname']);
     await pref.setString("email", payload['user']['email']);
     await pref.setString("token", payload['token']);
+    await pref.setString("fridge_id", payload['fridge']['id']);
     await pref.setBool("logged", true);
   }
 

@@ -26,7 +26,10 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         emit(SessionRecipeListState());
       }
       if (event.index == 2) {
-        emit(SessionLoadingState());
+        emit(SessionFavoriteState());
+      }
+      if (event.index == 3) {
+        emit(SessionProfileState());
       }
     });
 

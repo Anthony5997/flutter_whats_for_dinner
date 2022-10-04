@@ -34,6 +34,8 @@ class _SessionNavigatorState extends State<SessionNavigator> {
               pages: [
                 if (state is SessionInitial) MaterialPage(child: FridgeScreen()),
                 if (state is SessionLoadingState) MaterialPage(child: LoadingScreenSession()),
+                if (state is SessionFavoriteState) MaterialPage(child: LoadingScreenSession()),
+                if (state is SessionProfileState) MaterialPage(child: LoadingScreenSession()),
                 if (state is SessionPageSelectedState) MaterialPage(child: LoadingScreen()),
                 if (state is SessionIngredientCategoryState) MaterialPage(child: IngredientCategorieView()),
                 if (state is SessionRecipeListState) MaterialPage(child: RecipeListView()),

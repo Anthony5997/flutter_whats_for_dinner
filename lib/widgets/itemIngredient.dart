@@ -24,7 +24,7 @@ class _ItemIngredientState extends State<ItemIngredient> {
           color: Color.fromARGB(255, 112, 29, 23),
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+        borderRadius: BorderRadius.circular(10.0),
       ),
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(

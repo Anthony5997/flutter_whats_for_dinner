@@ -29,6 +29,10 @@ class SessionTest extends SessionState {
 
 class SessionIngredientCategoryState extends SessionState {}
 
+class SessionFavoriteState extends SessionState {}
+
+class SessionProfileState extends SessionState {}
+
 class SessionRecipeListState extends SessionState {}
 
 class SessionRecipeState extends SessionState {}

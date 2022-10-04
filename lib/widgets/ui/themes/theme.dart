@@ -45,15 +45,26 @@ class LigthTheme {
     //   bodyColor: Colors.red[700],
     // ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       backgroundColor: secondaryColor,
       selectedIconTheme: IconThemeData(color: primaryColor),
-      selectedItemColor: primaryColor,
+      selectedItemColor: Colors.blueGrey,
       unselectedItemColor: Colors.blueGrey,
       selectedLabelStyle: const TextStyle(color: Color.fromRGBO(120, 120, 120, 1), fontFamily: "LemonDays", fontSize: 14),
       unselectedLabelStyle: const TextStyle(fontFamily: "LemonDays", fontSize: 14),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(primary: primaryColor, textStyle: const TextStyle(fontSize: 16.0, fontFamily: "LemonDays", fontStyle: FontStyle.italic, color: Colors.red), side: BorderSide(color: primaryColorDark, width: .5), elevation: 4, padding: EdgeInsets.all(20)),
+      style: ElevatedButton.styleFrom(
+        primary: primaryColor,
+        textStyle: const TextStyle(fontSize: 16.0, fontFamily: "LemonDays", fontStyle: FontStyle.italic, color: Colors.red),
+        side: BorderSide(
+          color: primaryColorDark,
+          width: .5,
+        ),
+        elevation: 4,
+        padding: EdgeInsets.all(20),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       focusColor: primaryColor,

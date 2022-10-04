@@ -22,24 +22,48 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: Colors.black),
-          label: "Frigo",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.all_inclusive, color: Colors.black),
-          label: "Recette",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_pin_sharp, color: Colors.black),
-          label: "Profil",
-        ),
-      ],
-      onTap: (index) {
-        widget.change(index);
-        BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(index));
+    return BlocBuilder<SessionBloc, SessionState>(
+      builder: (context, state) {
+        return BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                size: (state is SessionInitial || state is SessionIngredientCategoryState) ? 34 : 28,
+                color: (state is SessionInitial || state is SessionIngredientCategoryState) ? Colors.red[900] : Colors.black,
+              ),
+              label: "Frigo",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.soup_kitchen_rounded,
+                size: state is SessionRecipeListState ? 34 : 28,
+                color: state is SessionRecipeListState ? Colors.red[900] : Colors.black,
+              ),
+              label: "Recette",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.favorite,
+                size: state is SessionFavoriteState ? 34 : 28,
+                color: state is SessionFavoriteState ? Colors.red[900] : Colors.black,
+              ),
+              label: "Favoris",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_pin,
+                size: state is SessionProfileState ? 34 : 28,
+                color: state is SessionProfileState ? Colors.red[900] : Colors.black,
+              ),
+              label: "Profil",
+            ),
+          ],
+          onTap: (index) {
+            widget.change(index);
+            BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(index));
+          },
+        );
       },
     );
   }

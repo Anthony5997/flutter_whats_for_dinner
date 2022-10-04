@@ -16,16 +16,21 @@ class _ItemRecipeState extends State<ItemRecipe> {
 
   @override
   Widget build(BuildContext context) {
-    var pertinenceRatio = double.parse('0.${widget.recipe.pertinence}');
+    double pertinenceRatio = 0;
+    if (widget.recipe.pertinence < 9) {
+      pertinenceRatio = double.parse('0.0${widget.recipe.pertinence}');
+    } else {
+      pertinenceRatio = double.parse('0.${widget.recipe.pertinence}');
+    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () async {
         print("Container clicked");
         print(widget.recipe.id.toString());
-        print(widget.recipe.pertinence.toString());
         print(widget.recipe.ingredients_missing_list);
-        print(pertinenceRatio);
+        print("PERTINENCE : ${widget.recipe.pertinence.toString()}");
+        print("PERTINENCE RATIO : $pertinenceRatio");
 
         // var recipedetail = await recipeListRepository.getOne(widget.recipe.id.toString());
         // print("DETAIL PLEASE");
@@ -144,7 +149,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text("Ingredient manquant : ${widget.recipe.ingredients_missing_list.length}"),
+                          child: Text("Ingredient manquant : ${widget.recipe.ingredients_missing_list.length}/${widget.recipe.ingredients_list.length}"),
                         ),
                         Center(
                           child: Padding(

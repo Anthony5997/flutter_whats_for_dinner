@@ -11,6 +11,13 @@ class FridgeEventInitial extends FridgeEvent {}
 
 class FridgeLoadingEvent extends FridgeEvent {}
 
+class FridgeOnChangeEvent extends FridgeEvent {
+  const FridgeOnChangeEvent({required this.saisis, required this.fridge, required this.ingredients_list});
+  final String saisis;
+  final Fridge fridge;
+  final List<Ingredient> ingredients_list;
+}
+
 class FridgeLoadedEvent extends FridgeEvent {}
 
 class FridgeAddIngredientEvent extends FridgeEvent {

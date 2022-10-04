@@ -1,21 +1,34 @@
 import 'package:flutter_whats_for_dinner/models/Fridge.dart';
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FridgeRepository {
   final ApiBaseHelper _helper = ApiBaseHelper();
 
   Future<Fridge> getUserFridge() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+
     final response = await _helper.getAuthParametre("/fridge");
 
     List<Ingredient> ingredients = [];
+    if (response["results"].length > 0) {
+      response["results"]["ingredients"].forEach((result) {
+        ingredients.add(Ingredient.fromJson(result));
+      });
 
-    response["results"]["ingredients"].forEach((result) {
-      ingredients.add(Ingredient.fromJson(result));
-    });
+      Fridge listFridge = Fridge(id: response["results"]["id"], ingredients_list: ingredients);
+      return listFridge;
+    } else {
+      String fridgeId = "";
 
-    Fridge listFridge = Fridge(id: response["results"]["id"], ingredients_list: ingredients);
-    return listFridge;
+      if (pref.getString('fridge_id') != null) {
+        fridgeId = pref.getString('fridge_id')!;
+      }
+
+      Fridge listFridge = Fridge(id: fridgeId, ingredients_list: ingredients);
+      return listFridge;
+    }
   }
 
   Future<dynamic> addIngredientFridge(array) async {

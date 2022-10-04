@@ -51,6 +51,10 @@ class _FridgeScreenState extends State<FridgeScreen> {
                                     hintText: 'Recherchez dans votre frigo ...',
                                     suffixIcon: Icon(Icons.search),
                                   ),
+                                  onChanged: (saisis) {
+                                    print('First text field: $saisis');
+                                    BlocProvider.of<FridgeBloc>(context).add(FridgeOnChangeEvent(saisis: saisis, fridge: state.fridge, ingredients_list: state.fridge.ingredients_list));
+                                  },
                                 ),
                               ),
                             ),
@@ -69,7 +73,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                                   child: ListView(
                                     controller: _scrollController,
                                     children: [
-                                      for (var i = 0; i < state.fridge.ingredients_list.length; i++) ItemIngredient(state.fridge.ingredients_list, i),
+                                      for (var i = 0; i < state.ingredient_list.length; i++) ItemIngredient(state.ingredient_list, i),
                                     ],
                                   ),
                                 ),
@@ -86,6 +90,37 @@ class _FridgeScreenState extends State<FridgeScreen> {
                               style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
                             ),
                           ),
+                        );
+                      } else if (state is FridgeNoResultsState) {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
+                              child: Container(
+                                width: width * 0.85,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: 'Recherchez dans votre frigo ...',
+                                    suffixIcon: Icon(Icons.search),
+                                  ),
+                                  onChanged: (saisis) {
+                                    print('First text field: $saisis');
+                                    BlocProvider.of<FridgeBloc>(context).add(FridgeOnChangeEvent(saisis: saisis, fridge: state.fridge, ingredients_list: state.fridge.ingredients_list));
+                                  },
+                                ),
+                              ),
+                            ),
+                            const Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
+                                child: Text(
+                                  "Aucun résultat",
+                                  style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       } else {
                         return const Center(
