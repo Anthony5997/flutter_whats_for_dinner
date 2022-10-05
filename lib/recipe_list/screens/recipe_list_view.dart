@@ -47,7 +47,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                               height: state.recipeResult.length == 1 ? height * 0.30 : height * 0.8,
                               // decoration: styleBox(),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 0),
                                 child: ListView(
                                   children: [
                                     for (var i = 0; i < state.recipeResult.length; i++) ItemRecipe(state.recipeResult[i]),

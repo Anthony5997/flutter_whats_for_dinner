@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/screens/recipe_detail.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class ItemRecipe extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
       onTap: () async {
         print("Container clicked");
         print(widget.recipe.id.toString());
-        print(widget.recipe.ingredients_missing_list);
+        // print(widget.recipe.ingredients_missing_list);
         print("PERTINENCE : ${widget.recipe.pertinence.toString()}");
         print("PERTINENCE RATIO : $pertinenceRatio");
 
@@ -38,12 +39,12 @@ class _ItemRecipeState extends State<ItemRecipe> {
 
         // BlocProvider.of<RecipeListBloc>(context).add(Recipe());
 
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => RecipeDetailView(),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecipeDetailView(),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -90,8 +91,8 @@ class _ItemRecipeState extends State<ItemRecipe> {
                             Flexible(
                                 child: Text(
                               widget.recipe.title,
-                              style: const TextStyle(
-                                fontSize: 20,
+                              style: TextStyle(
+                                fontSize: width > 400 ? 20 : 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -108,44 +109,15 @@ class _ItemRecipeState extends State<ItemRecipe> {
                             ),
                           ],
                         ),
-                        Wrap(
-                          children: [
-                            // widget.recipe.ingredients_list.forEach(
-                            // for (var result in widget.recipe.ingredients_list) Text(result.category_id.toString()),
-                            //   (result) => {
-                            // print(result),
-                            //   },
-                            // ),
-
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'test',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, right: 8, bottom: 8),
-                              child: Text(
-                                'test',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'test',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'test',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, bottom: 8, left: 4, right: 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (var i = 0; i < 4; i++) Text(widget.recipe.ingredients_list[i].name),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -194,7 +166,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: LinearPercentIndicator(
-                        width: MediaQuery.of(context).size.width - 400,
+                        width: width < 800 ? width * 0.58 : width * 0.6,
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,

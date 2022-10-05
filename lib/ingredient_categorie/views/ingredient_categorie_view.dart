@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categorie_bloc.dart';
-import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
-import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_by_categorie.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
+import 'package:flutter_whats_for_dinner/widgets/itemIngredientCategory.dart';
 
 class IngredientCategorieView extends StatelessWidget {
   const IngredientCategorieView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    IngredientCategoryRepository ingredientCategoryRepository = IngredientCategoryRepository();
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(0)),
+        ),
+      ),
       endDrawer: CustomDrawer(),
       body: BlocProvider<IngredientCategorieBloc>(
         create: (context) => IngredientCategorieBloc()..add(IngredientCategorieLoadingEvent()),
@@ -27,46 +34,15 @@ class IngredientCategorieView extends StatelessWidget {
                 if (state is IngredientCategorieLoadedState) {
                   print(state.ingredientCat);
                   return Expanded(
-                    child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500, childAspectRatio: 3 / 2, crossAxisSpacing: 20, mainAxisSpacing: 20),
-                      itemCount: state.ingredientCat.length,
-                      itemBuilder: (BuildContext context, index) {
-                        return GestureDetector(
-                          onTap: () async {
-                            print(state.ingredientCat[index]['id'].toString());
-                            var ingredientCategorieList = await ingredientCategoryRepository.getById(state.ingredientCat[index]['id'].toString());
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList["results"]),
-                              ),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(border: Border.all(width: 2, color: Colors.red), borderRadius: BorderRadius.circular(15)),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    child: Image.network(
-                                      Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/categories/${state.ingredientCat[index]['image']}'),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                    width: 150,
-                                    height: 150,
-                                  ),
-                                  Text(state.ingredientCat[index]['name']),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                    child: GridView(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
+                        primary: false,
+                        padding: const EdgeInsets.all(1),
+                        children: <Widget>[
+                          for (var i = 0; i < state.ingredientCat.length; i++) ItemIngredientCategory(state.ingredientCat[i]),
+                        ]),
                   );
                 } else {
                   return const Center(

@@ -35,6 +35,8 @@ class SessionProfileState extends SessionState {}
 
 class SessionRecipeListState extends SessionState {}
 
+class SessionRecipeDetailState extends SessionState {}
+
 class SessionRecipeState extends SessionState {}
 
 class SessionLogoutState extends SessionState {}

@@ -67,17 +67,17 @@ class _ItemIngredientState extends State<ItemIngredient> {
             print("Ingrédient supprimé : ${widget.ingredients_list[widget.index].id}");
             context.read<FridgeBloc>().add(FridgeDeleteIngredientEvent(ingredientId: widget.ingredients_list[widget.index].id));
             // BlocProvider.of<FridgeBloc>(context).add(FridgeDeleteIngredientEvent(ingredientId: widget.ingredients_list[widget.index].id))
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.red,
-                content: Text(
-                  "Suppression effectuée",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(
+            //     behavior: SnackBarBehavior.floating,
+            //     backgroundColor: Colors.red,
+            //     content: Text(
+            //       "Suppression effectuée",
+            //       textAlign: TextAlign.center,
+            //       style: TextStyle(fontSize: 20),
+            //     ),
+            //   ),
+            // );
           },
         ),
       ),
