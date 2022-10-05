@@ -70,7 +70,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
                       Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/recipe/${widget.recipe.image}'),
-                      width: 220.0,
+                      width: width > 500 ? 220.0 : width * 0.38,
                       height: 180.0,
                       fit: BoxFit.fill,
                     ),
@@ -92,7 +92,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                 child: Text(
                               widget.recipe.title,
                               style: TextStyle(
-                                fontSize: width > 400 ? 20 : 16,
+                                fontSize: width > 550 ? 16 : 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -115,13 +115,45 @@ class _ItemRecipeState extends State<ItemRecipe> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              for (var i = 0; i < 4; i++) Text(widget.recipe.ingredients_list[i].name),
+                              for (var i = 0; i < 4; i++)
+                                Text(
+                                  widget.recipe.ingredients_list[i].name,
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
                             ],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text("Ingredient manquant : ${widget.recipe.ingredients_missing_list.length}/${widget.recipe.ingredients_list.length}"),
+                          child: Row(children: [
+                            widget.recipe.ingredients_missing_list.length != 0
+                                ? Text("Manquants : ${widget.recipe.ingredients_list.length}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                                : Text(
+                                    "Prêt !",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                            widget.recipe.ingredients_missing_list.length != 0
+                                ? Icon(
+                                    Icons.check,
+                                    color: Colors.green[800],
+                                  )
+                                : Tooltip(
+                                    message: '',
+                                    child: IconButton(
+                                      icon: Icon(Icons.info_outline),
+                                      iconSize: 14,
+                                      tooltip: "Voir plus",
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                          ]),
                         ),
                         Center(
                           child: Padding(
@@ -132,8 +164,13 @@ class _ItemRecipeState extends State<ItemRecipe> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(widget.recipe.preparation_minutes.toString()),
-                                    const Icon(Icons.punch_clock),
+                                    Text(
+                                      widget.recipe.preparation_minutes.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.access_time),
                                   ],
                                 ),
                                 const SizedBox(
@@ -141,8 +178,11 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(widget.recipe.cooking_minutes.toString()),
-                                    const Icon(Icons.fireplace_outlined),
+                                    Text(
+                                      widget.recipe.cooking_minutes.toString(),
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                    const Icon(Icons.gas_meter_outlined),
                                   ],
                                 ),
                               ],
