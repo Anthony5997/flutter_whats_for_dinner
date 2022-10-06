@@ -1,10 +1,11 @@
 part of 'recipe_bloc.dart';
 
-abstract class RecipeState extends Equatable {
+abstract class RecipeState {
   const RecipeState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class RecipeInitial extends RecipeState {}
+
+class RecipeLoadingState extends RecipeState {}
+
+class RecipeLoadedState extends RecipeState {}

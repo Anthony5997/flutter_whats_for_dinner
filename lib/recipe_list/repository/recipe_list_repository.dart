@@ -19,13 +19,27 @@ class RecipeListRepository {
   }
 
   Future<Recipe> getOne(id) async {
-    final response = await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
+    final response =
+        await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
     print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
     print(response);
 
     Recipe recipe = Recipe.fromJson(response);
 
     return recipe;
+  }
+
+  Future<List<Recipe>> searchRecipe(saisis) async {
+    final response =
+        await _helper.postAuthRecipeSearch("/recipe/search", saisis);
+
+    List<Recipe> listRecipe = [];
+
+    response["results"].forEach((recipe) {
+      listRecipe.add(Recipe.fromJson(recipe));
+    });
+
+    return listRecipe;
   }
 }
 

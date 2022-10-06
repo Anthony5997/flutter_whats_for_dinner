@@ -7,5 +7,7 @@ part 'recipe_state.dart';
 class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   RecipeBloc() : super(RecipeInitial()) {
     on<RecipeEvent>((event, emit) {});
+
+    on<RecipeEventInitial>((event, emit) {});
   }
 }

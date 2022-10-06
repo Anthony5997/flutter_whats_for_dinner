@@ -7,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
-  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences =
+      SharedPreferences.getInstance();
 
   Future<dynamic> get(String url) async {
     dynamic responseJson;
@@ -124,6 +125,34 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> postAuthRecipeSearch(String url, saisis) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      print("route");
+      print(_baseUrl + url);
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'input': saisis,
+          },
+        ),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
   Future<dynamic> postAuthRecipeDetail(String url, id) async {
     dynamic responseJson;
 
@@ -220,12 +249,11 @@ class ApiBaseHelper {
   dynamic _returnResponse(http.Response response) {
     print("statusCode");
     print(response.statusCode);
-    print(response.body);
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
-        print("responseJson");
-        print(responseJson);
+        // print("responseJson");
+        // print(responseJson);
 
         return responseJson;
       case 400:
