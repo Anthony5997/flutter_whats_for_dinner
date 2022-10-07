@@ -50,7 +50,7 @@ Future<void> _showMyDialog(context, ingredient) async {
       double height = MediaQuery.of(context).size.height;
       double width = MediaQuery.of(context).size.width;
       return AlertDialog(
-        title: const Text('AlertDialog Title'),
+        title: const Text('Ajouter'),
         content: SingleChildScrollView(
           child: FormBuilder(
             key: formKey,

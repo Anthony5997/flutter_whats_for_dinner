@@ -46,16 +46,25 @@ Future<void> _showMyDialog(context, ingredients) async {
         content: SingleChildScrollView(
           child: Column(children: [
             for (var i = 0; i < ingredients.length; i++)
-              Row(
-                children: [
-                  Image.network(
-                    Uri.encodeFull(
-                        'http://laravel_whats_for_dinner.test/assets/ingredients/${ingredients[i].image}'),
-                    width: 35,
-                    height: 35,
-                  ),
-                  Container(child: Text(ingredients[i].name)),
-                ],
+              Container(
+                child: Row(
+                  children: [
+                    Image.network(
+                      Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${ingredients[i].image}'),
+                      width: 35,
+                      height: 35,
+                    ),
+                    Expanded(
+                      child: Container(
+                          child: Text(
+                        ingredients[i].name,
+                        softWrap: false,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                    ),
+                  ],
+                ),
               ),
           ]),
         ),

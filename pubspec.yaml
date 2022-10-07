@@ -74,6 +74,13 @@ flutter:
   assets:
     - assets/images/logo-genial.png
     - assets/images/cooking-pot.png
+    - assets/images/icons/ble.png
+    - assets/images/icons/lait.png
+    - assets/images/icons/vegan.png
+    - assets/images/icons/vegetarien.png
+    - assets/images/icons/chronometre.png
+    - assets/images/icons/cuisson.png
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
