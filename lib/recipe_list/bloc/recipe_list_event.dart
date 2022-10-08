@@ -20,6 +20,10 @@ class RecipeListOnChangeEvent extends RecipeListEvent {
 
 class RecipeDetailLoadedEvent extends RecipeListEvent {}
 
+class RecipeFavoriteEvent extends RecipeListEvent {}
+
+class RecipeFavoriteListEvent extends RecipeListEvent {}
+
 class RecipeDetailLoadingEvent extends RecipeListEvent {}
 
 class RecipeListAddIngredientEvent extends RecipeListEvent {}

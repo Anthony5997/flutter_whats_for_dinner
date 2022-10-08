@@ -19,8 +19,7 @@ class RecipeListRepository {
   }
 
   Future<Recipe> getOne(id) async {
-    final response =
-        await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
+    final response = await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
     print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
     print(response);
 
@@ -29,9 +28,26 @@ class RecipeListRepository {
     return recipe;
   }
 
+  Future<void> favoriteToggle(id) async {
+    final response = await _helper.postAuthFavoriteToggle("/favorite/check", id);
+    print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
+    print(response);
+  }
+
+  Future<List<Recipe>> getFavorites() async {
+    final response = await _helper.getAuth("/favorite/favoriteRecipe");
+    print("response");
+    print(response);
+    List<Recipe> listRecipe = [];
+
+    response["results"].forEach((recipe) {
+      listRecipe.add(Recipe.fromJson(recipe));
+    });
+    return listRecipe;
+  }
+
   Future<List<Recipe>> searchRecipe(saisis) async {
-    final response =
-        await _helper.postAuthRecipeSearch("/recipe/search", saisis);
+    final response = await _helper.postAuthRecipeSearch("/recipe/search", saisis);
 
     List<Recipe> listRecipe = [];
 

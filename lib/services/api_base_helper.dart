@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
-  final Future<SharedPreferences> _userPreferences =
-      SharedPreferences.getInstance();
+  final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
 
   Future<dynamic> get(String url) async {
     dynamic responseJson;
@@ -28,6 +27,9 @@ class ApiBaseHelper {
     dynamic responseJson;
     final SharedPreferences prefs = await _userPreferences;
     var token = prefs.get("token");
+    print("TOKEN");
+    print(token);
+    print("==================================");
 
     try {
       print('$_baseUrl$url');
@@ -154,6 +156,34 @@ class ApiBaseHelper {
   }
 
   Future<dynamic> postAuthRecipeDetail(String url, id) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      print("route");
+      print(_baseUrl + url);
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'recipeId': id,
+          },
+        ),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> postAuthFavoriteToggle(String url, id) async {
     dynamic responseJson;
 
     final SharedPreferences prefs = await _userPreferences;

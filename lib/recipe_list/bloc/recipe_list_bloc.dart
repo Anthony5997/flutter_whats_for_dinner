@@ -37,8 +37,7 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
         emit(RecipeListEmptyState());
       } else {
         try {
-          var recipeResult =
-              await recipeListRepository.searchRecipe(event.saisis);
+          var recipeResult = await recipeListRepository.searchRecipe(event.saisis);
           print("RECIPE PASSER");
 
           print(recipeResult);
@@ -47,6 +46,21 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
           print("CATCH RECIPE");
           emit(RecipeListEmptyState());
         }
+      }
+    });
+
+    on<RecipeFavoriteListEvent>((event, emit) async {
+      emit(RecipeListLoadingState());
+
+      try {
+        var recipeResult = await recipeListRepository.getFavorites();
+        print("RECIPE PASSER");
+
+        print(recipeResult);
+        emit(RecipeListLoadedState(recipeResult));
+      } catch (e) {
+        print("CATCH RECIPE");
+        emit(RecipeListEmptyState());
       }
     });
 

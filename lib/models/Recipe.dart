@@ -21,6 +21,7 @@ class Recipe {
   final bool gluten_free;
   final bool dairy_free;
   final int pertinence;
+  final bool favorite;
   final List<Ingredient> ingredients_list;
   final List<Ingredient> ingredients_missing_list;
   final List<RecipeStep> recipe_steps;
@@ -41,6 +42,7 @@ class Recipe {
     required this.gluten_free,
     required this.dairy_free,
     required this.pertinence,
+    required this.favorite,
     required this.ingredients_list,
     required this.ingredients_missing_list,
     required this.recipe_steps,

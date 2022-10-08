@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/screens/recipe_detail.dart';
 import 'package:flutter_whats_for_dinner/widgets/ingredientManquantDialogue.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -15,6 +18,7 @@ class ItemRecipe extends StatefulWidget {
 
 class _ItemRecipeState extends State<ItemRecipe> {
   final ScrollController _scrollController = ScrollController();
+  final RecipeListRepository _recipeListRepository = RecipeListRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +74,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      Uri.encodeFull(
-                          'http://laravel_whats_for_dinner.test/assets/recipe/${widget.recipe.image}'),
+                      Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/recipe/${widget.recipe.image}'),
                       width: width > 500 ? 220.0 : width * 0.38,
                       height: 180.0,
                       fit: BoxFit.fill,
@@ -99,21 +102,28 @@ class _ItemRecipeState extends State<ItemRecipe> {
                               ),
                             )),
                             IconButton(
-                              icon: const Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                                size: 24,
-                              ),
+                              icon: widget.recipe.favorite
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                      size: 24,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border_outlined,
+                                      color: Colors.red,
+                                      size: 24,
+                                    ),
                               tooltip: 'Ajouter au favoris',
-                              onPressed: () {
+                              onPressed: () async {
                                 print("TEST FAV");
+                                await _recipeListRepository.favoriteToggle(widget.recipe.id);
+                                // BlocProvider.of<RecipeListBloc>(context).add(SessionPageSelectedEvent(0));
                               },
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, bottom: 8, left: 4, right: 0),
+                          padding: const EdgeInsets.only(top: 8, bottom: 8, left: 4, right: 0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,8 +142,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(children: [
                             widget.recipe.ingredients_missing_list.length != 0
-                                ? Text(
-                                    "Manquants : ${widget.recipe.ingredients_list.length}",
+                                ? Text("Manquants : ${widget.recipe.ingredients_list.length}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ))
@@ -148,8 +157,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                     Icons.check,
                                     color: Colors.green[800],
                                   )
-                                : MissingIngredientButtonDialog(
-                                    widget.recipe.ingredients_missing_list),
+                                : MissingIngredientButtonDialog(widget.recipe.ingredients_missing_list),
                           ]),
                         ),
                         Center(
@@ -162,8 +170,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                 Row(
                                   children: [
                                     Text(
-                                      widget.recipe.preparation_minutes
-                                          .toString(),
+                                      widget.recipe.preparation_minutes.toString(),
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -178,8 +185,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                   children: [
                                     Text(
                                       widget.recipe.cooking_minutes.toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontWeight: FontWeight.bold),
                                     ),
                                     const Icon(Icons.gas_meter_outlined),
                                   ],
@@ -212,11 +218,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                         percent: pertinenceRatio,
                         center: Text(
                           "${widget.recipe.pertinence.toString()}%",
-                          style: const TextStyle(
-                              fontFamily: "LemonDays",
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white),
+                          style: const TextStyle(fontFamily: "LemonDays", fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
                         ),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.redAccent,
