@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
-import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/quantity_field.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -87,7 +85,6 @@ Future<void> _showMyDialog(context, ingredient) async {
                     ),
                   ],
                 ),
-                // addFridgeIngredientQuantity(allUnits: allUnits, formKey: formKey),
               ],
             ),
           ),

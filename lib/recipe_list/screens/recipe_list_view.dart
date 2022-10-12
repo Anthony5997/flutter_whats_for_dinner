@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 import 'package:flutter_whats_for_dinner/widgets/itemRecipe.dart';
-import 'package:flutter_whats_for_dinner/widgets/itemRecipeDetails.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class RecipeListView extends StatefulWidget {
   const RecipeListView({Key? key}) : super(key: key);
@@ -17,6 +14,7 @@ class RecipeListView extends StatefulWidget {
 
 class _RecipeListViewState extends State<RecipeListView> {
   RecipeListRepository recipeListRepository = RecipeListRepository();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -38,21 +36,18 @@ class _RecipeListViewState extends State<RecipeListView> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, top: 10, bottom: 20),
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
                       child: Container(
                         width: width * 0.85,
                         child: TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText:
-                                'Recherchez parmis toutes nos recette ...',
+                            hintText: 'Recherchez parmis toutes nos recette ...',
                             suffixIcon: Icon(Icons.search),
                           ),
                           onChanged: (saisis) {
                             print('First text field: $saisis');
-                            BlocProvider.of<RecipeListBloc>(context)
-                                .add(RecipeListOnChangeEvent(
+                            BlocProvider.of<RecipeListBloc>(context).add(RecipeListOnChangeEvent(
                               saisis: saisis,
                             ));
                           },
@@ -68,34 +63,15 @@ class _RecipeListViewState extends State<RecipeListView> {
                                 children: [
                                   Container(
                                     width: width * 0.85,
-                                    height: state.recipeResult.length == 1
-                                        ? height * 0.50
-                                        : height * 0.8,
+                                    height: state.recipeResult.length == 1 ? height * 0.50 : height * 0.75,
                                     // decoration: styleBox(),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 8.0,
-                                          bottom: 8,
-                                          left: 8,
-                                          right: 0),
+                                      padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 0),
                                       child: ListView(
                                         children: [
-                                          for (var i = 0;
-                                              i < state.recipeResult.length;
-                                              i++)
-                                            ItemRecipe(state.recipeResult[i]),
+                                          for (var i = 0; i < state.recipeResult.length; i++) ItemRecipe(state.recipeResult[i]),
                                         ],
                                       ),
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    child: ElevatedButton(
-                                      child: const Text("What's for dinner ?"),
-                                      onPressed: () {
-                                        BlocProvider.of<RecipeListBloc>(context)
-                                            .add(RecipeListLoadingEvent());
-                                      },
                                     ),
                                   ),
                                 ],
@@ -105,8 +81,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                                 children: [
                                   Center(
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 48.0, horizontal: 12),
+                                      padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
                                       child: Image.asset(
                                         'assets/images/cooking-pot.png',
                                         width: width > 550 ? 400 : 300,
@@ -118,8 +93,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                                   ElevatedButton(
                                     child: const Text("What's for dinner ?"),
                                     onPressed: () {
-                                      BlocProvider.of<RecipeListBloc>(context)
-                                          .add(RecipeListLoadingEvent());
+                                      BlocProvider.of<RecipeListBloc>(context).add(RecipeListLoadingEvent());
                                     },
                                   ),
                                 ],

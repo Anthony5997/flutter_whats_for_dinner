@@ -26,7 +26,6 @@ class AuthenticationRepository {
 
   Future<dynamic> attemptAutoLogin(Emitter emit) async {
     final SharedPreferences pref = await _userPreferences;
-    // await getUserSharedPreferences(pref);
     if (pref.getBool("logged") == null) {
       emit(LoginState());
     } else {

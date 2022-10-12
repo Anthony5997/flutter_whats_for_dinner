@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
-import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/screens/recipe_detail.dart';
 import 'package:flutter_whats_for_dinner/widgets/ingredientManquantDialogue.dart';
@@ -20,10 +18,17 @@ class _ItemRecipeState extends State<ItemRecipe> {
   final ScrollController _scrollController = ScrollController();
   final RecipeListRepository _recipeListRepository = RecipeListRepository();
 
+  _toggleFavorite() {
+    setState(() {
+      widget.recipe.favorite = !widget.recipe.favorite;
+      _recipeListRepository.favoriteToggle(widget.recipe.id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double pertinenceRatio = 0;
-    if (widget.recipe.pertinence < 9) {
+    if (widget.recipe.pertinence <= 9) {
       pertinenceRatio = double.parse('0.0${widget.recipe.pertinence}');
     } else {
       pertinenceRatio = double.parse('0.${widget.recipe.pertinence}');
@@ -32,18 +37,6 @@ class _ItemRecipeState extends State<ItemRecipe> {
     double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () async {
-        print("Container clicked");
-        print(widget.recipe.id.toString());
-        // print(widget.recipe.ingredients_missing_list);
-        print("PERTINENCE : ${widget.recipe.pertinence.toString()}");
-        print("PERTINENCE RATIO : $pertinenceRatio");
-
-        // var recipedetail = await recipeListRepository.getOne(widget.recipe.id.toString());
-        // print("DETAIL PLEASE");
-        // print(recipedetail);
-
-        // BlocProvider.of<RecipeListBloc>(context).add(Recipe());
-
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -60,7 +53,6 @@ class _ItemRecipeState extends State<ItemRecipe> {
             ),
             borderRadius: BorderRadius.circular(10.0),
           ),
-          // height: 200,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -114,10 +106,8 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                       size: 24,
                                     ),
                               tooltip: 'Ajouter au favoris',
-                              onPressed: () async {
-                                print("TEST FAV");
-                                await _recipeListRepository.favoriteToggle(widget.recipe.id);
-                                // BlocProvider.of<RecipeListBloc>(context).add(SessionPageSelectedEvent(0));
+                              onPressed: () {
+                                _toggleFavorite();
                               },
                             ),
                           ],

@@ -25,6 +25,18 @@ class _FridgeScreenState extends State<FridgeScreen> {
       appBar: AppBar(
         title: const Text('Mon frigo'),
         centerTitle: true,
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Text("Vider le frigo"),
+                onTap: () => {
+                  BlocProvider.of<FridgeBloc>(context).add(FridgeDeleteAllIngredientsEvent()),
+                },
+              ),
+            ],
+          ),
+        ],
       ),
       // backgroundColor: themeColor['principale'],
       drawer: CustomDrawer(),

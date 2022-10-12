@@ -47,8 +47,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         if (response["status"] == true) {
           emit(AuthenticationSuccessState());
         } else {
-          print("response");
-          print(response['errors']);
           emit(RegisterState(message: response["message"]));
         }
       } catch (e) {

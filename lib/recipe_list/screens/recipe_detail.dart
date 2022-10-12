@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
-import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
-import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 
 class RecipeDetailView extends StatefulWidget {
   RecipeDetailView({Key? key, required this.recipe}) : super(key: key);
@@ -16,13 +12,19 @@ class RecipeDetailView extends StatefulWidget {
 }
 
 class _RecipeDetailViewState extends State<RecipeDetailView> {
+  final RecipeListRepository _recipeListRepository = RecipeListRepository();
+
+  _toggleFavorite() {
+    setState(() {
+      widget.recipe.favorite = !widget.recipe.favorite;
+      _recipeListRepository.favoriteToggle(widget.recipe.id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    print("width $width");
-    print("heigth $height");
-    print(widget.recipe);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -52,23 +54,39 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
               margin: EdgeInsets.all(8.0),
               child: ListView(
                 children: [
-                  Container(
-                    child: Image.network(
-                      Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/recipe/${widget.recipe.image}'),
-                      // width: width < 550
-                      //     ? 280.0
-                      //     : width < 690
-                      //         ? width * 0.8
-                      //         : 550,
-                      // height: width < 550
-                      //     ? 240.0
-                      //     : width < 690
-                      //         ? height * 0.45
-                      //         : 550,
-                      fit: BoxFit.cover,
-                    ),
-                    width: width,
-                    height: 250,
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                          width: width,
+                          height: 250,
+                          child: Image.network(
+                            Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/recipe/${widget.recipe.image}'),
+                            fit: BoxFit.cover,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            icon: widget.recipe.favorite
+                                ? Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 40,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border_outlined,
+                                    color: Colors.red,
+                                    size: 40,
+                                  ),
+                            tooltip: 'Ajouter au favoris',
+                            onPressed: () {
+                              _toggleFavorite();
+                            },
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, left: 8, right: 8, bottom: 15),
@@ -394,7 +412,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                                         padding: const EdgeInsets.only(left: 8.0),
                                         child: Text(
                                           widget.recipe.recipe_steps[i].step,
-                                          style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w400, fontSize: 14),
+                                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
                                           textAlign: TextAlign.start,
                                           softWrap: true,
                                           maxLines: 10,

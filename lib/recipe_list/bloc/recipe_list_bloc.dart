@@ -20,12 +20,8 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
 
       try {
         var recipeResult = await recipeListRepository.get();
-        print("RECIPE PASSER");
-
-        print(recipeResult);
         emit(RecipeListLoadedState(recipeResult));
       } catch (e) {
-        print("CATCH RECIPE");
         emit(RecipeListEmptyState());
       }
     });
@@ -38,12 +34,8 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
       } else {
         try {
           var recipeResult = await recipeListRepository.searchRecipe(event.saisis);
-          print("RECIPE PASSER");
-
-          print(recipeResult);
           emit(RecipeListLoadedState(recipeResult));
         } catch (e) {
-          print("CATCH RECIPE");
           emit(RecipeListEmptyState());
         }
       }
@@ -54,30 +46,10 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
 
       try {
         var recipeResult = await recipeListRepository.getFavorites();
-        print("RECIPE PASSER");
-
-        print(recipeResult);
-        emit(RecipeListLoadedState(recipeResult));
+        emit(RecipeListFavoriteLoadedState(recipeResult));
       } catch (e) {
-        print("CATCH RECIPE");
         emit(RecipeListEmptyState());
       }
     });
-
-    // on<RecipeDetailLoadingEvent>((event, emit) async {
-    //   emit(RecipeDetailLoadingState());
-
-    //   try {
-    //     var recipeResult = await recipeListRepository.getOne(event.id);
-    //     emit(RecipeDetailLoadedState(recipeResult));
-    //   } catch (e) {
-    //     emit(RecipeListEmptyState());
-    //   }
-    // });
-
-    // on<RecipeDetailLoadedEvent>((event, emit) async {
-    //   // var recipeResult = await recipeListRepository.getOne(event.id);
-    //   // emit(RecipeDetailLoadedState(recipeResult));
-    // });
   }
 }

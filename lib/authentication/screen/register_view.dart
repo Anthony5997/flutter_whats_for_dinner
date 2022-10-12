@@ -15,8 +15,6 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("error");
-    print(error);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,

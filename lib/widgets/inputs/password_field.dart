@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -30,14 +28,9 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       name: "password",
       initialValue: widget.value,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(
-            errorText: "Veuillez saisir un mot de passe."),
-        FormBuilderValidators.maxLength(24,
-            errorText:
-                "Votre mot de passe ne doit pas contenir plus de 24 caractères."),
-        FormBuilderValidators.minLength(8,
-            errorText:
-                "Votre mot de passe doit contenir au moins 8 caractères."),
+        FormBuilderValidators.required(errorText: "Veuillez saisir un mot de passe."),
+        FormBuilderValidators.maxLength(24, errorText: "Votre mot de passe ne doit pas contenir plus de 24 caractères."),
+        FormBuilderValidators.minLength(8, errorText: "Votre mot de passe doit contenir au moins 8 caractères."),
       ]),
       keyboardType: TextInputType.visiblePassword,
       decoration: InputDecoration(
@@ -47,7 +40,6 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
           padding: EdgeInsetsDirectional.only(end: 12.0),
           child: IconButton(
             icon: Icon(
-              // Based on passwordVisible state choose the icon
               _obscureText ? Icons.visibility : Icons.visibility_off,
             ),
             onPressed: _toggle,

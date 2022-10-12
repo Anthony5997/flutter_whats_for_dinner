@@ -14,8 +14,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("error");
-    print(error);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(

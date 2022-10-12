@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 import 'package:flutter_whats_for_dinner/widgets/itemRecipe.dart';
-import 'package:flutter_whats_for_dinner/widgets/itemRecipeDetails.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class FavoriteRecipeListView extends StatefulWidget {
   const FavoriteRecipeListView({Key? key}) : super(key: key);
@@ -41,7 +38,7 @@ class _FavoriteRecipeListViewState extends State<FavoriteRecipeListView> {
                       child: SizedBox(
                         child: Column(
                           children: [
-                            if (state is RecipeListLoadedState)
+                            if (state is RecipeListFavoriteLoadedState)
                               Column(
                                 children: [
                                   Container(

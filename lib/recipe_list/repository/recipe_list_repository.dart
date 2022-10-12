@@ -8,8 +8,6 @@ class RecipeListRepository {
 
   Future<List<Recipe>> get() async {
     final response = await _helper.getAuth("/recipe/potentialRecipes");
-    print("response");
-    print(response);
     List<Recipe> listRecipe = [];
 
     response["results"].forEach((recipe) {
@@ -20,9 +18,6 @@ class RecipeListRepository {
 
   Future<Recipe> getOne(id) async {
     final response = await _helper.postAuthRecipeDetail("/recipe/recipeDetail", id);
-    print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
-    print(response);
-
     Recipe recipe = Recipe.fromJson(response);
 
     return recipe;
@@ -30,14 +25,11 @@ class RecipeListRepository {
 
   Future<void> favoriteToggle(id) async {
     final response = await _helper.postAuthFavoriteToggle("/favorite/check", id);
-    print("ONE RECIIIIIIIIIIIIIIPE RESPONSE");
     print(response);
   }
 
   Future<List<Recipe>> getFavorites() async {
     final response = await _helper.getAuth("/favorite/favoriteRecipe");
-    print("response");
-    print(response);
     List<Recipe> listRecipe = [];
 
     response["results"].forEach((recipe) {
@@ -48,7 +40,6 @@ class RecipeListRepository {
 
   Future<List<Recipe>> searchRecipe(saisis) async {
     final response = await _helper.postAuthRecipeSearch("/recipe/search", saisis);
-
     List<Recipe> listRecipe = [];
 
     response["results"].forEach((recipe) {

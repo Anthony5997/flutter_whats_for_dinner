@@ -23,6 +23,11 @@ class RecipeDetailLoadedState extends RecipeListState {
   RecipeDetailLoadedState(this.recipeResult);
 }
 
+class RecipeListFavoriteLoadedState extends RecipeListState {
+  List<dynamic> recipeResult;
+  RecipeListFavoriteLoadedState(this.recipeResult);
+}
+
 class RecipeListEmptyState extends RecipeListState {}
 
 class RecipeListAddIngredientState extends RecipeListState {}

@@ -43,4 +43,11 @@ class FridgeRepository {
 
     return fridge;
   }
+
+  Future<Fridge> deleteAllIngredientsFridge(fridgeId) async {
+    await _helper.postAuthDeleteAllIngredientsInFridge("/fridge/deleteAllIngredients", fridgeId);
+    Fridge fridge = await getUserFridge();
+
+    return fridge;
+  }
 }

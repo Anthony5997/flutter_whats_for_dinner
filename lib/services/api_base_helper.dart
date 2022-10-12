@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
+  // final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
   final String _baseUrl = "http://laravel_whats_for_dinner.test/api";
   final Future<SharedPreferences> _userPreferences = SharedPreferences.getInstance();
 
@@ -127,6 +128,33 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> postAuthDeleteAllIngredientsInFridge(String url, fridgeId) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'fridgeId': fridgeId,
+          },
+        ),
+      );
+
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
   Future<dynamic> postAuthRecipeSearch(String url, saisis) async {
     dynamic responseJson;
 
@@ -235,6 +263,7 @@ class ApiBaseHelper {
 
   Future<dynamic> postLogin(email, password) async {
     dynamic responseJson;
+    print(_baseUrl);
     try {
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/login"),

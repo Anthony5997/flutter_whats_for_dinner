@@ -33,3 +33,5 @@ class FridgeDeleteIngredientEvent extends FridgeEvent {
 
   final int ingredientId;
 }
+
+class FridgeDeleteAllIngredientsEvent extends FridgeEvent {}

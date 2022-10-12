@@ -98,5 +98,22 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
         }
       }
     });
+
+    on<FridgeDeleteAllIngredientsEvent>((event, emit) async {
+      emit(FridgeLoadingState());
+
+      try {
+        Fridge fridge = await fridgeRepository.getUserFridge();
+        fridge = await fridgeRepository.deleteAllIngredientsFridge(fridge.id);
+
+        if (fridge.ingredients_list.length == 0) {
+          emit(FridgeEmptyState());
+        } else {
+          emit(FridgeLoadedState(fridge, fridge.ingredients_list));
+        }
+      } catch (e) {
+        emit(FridgeEmptyState());
+      }
+    });
   }
 }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_by_categorie.dart';
-import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 
 class ItemIngredientCategory extends StatefulWidget {
   ItemIngredientCategory(this.ingredients_list) : super();
@@ -24,7 +21,6 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
     return Container(
       child: GestureDetector(
         onTap: () async {
-          print(widget.ingredients_list['id'].toString());
           var ingredientCategorieList = await ingredientCategoryRepository.getById(widget.ingredients_list['id'].toString());
 
           Navigator.push(

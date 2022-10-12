@@ -20,7 +20,7 @@ class _ItemIngredientState extends State<ItemIngredient> {
       color: Colors.grey[300],
       elevation: 8,
       shape: RoundedRectangleBorder(
-        side: BorderSide(
+        side: const BorderSide(
           color: Color.fromARGB(255, 112, 29, 23),
           width: 2,
         ),
@@ -28,20 +28,16 @@ class _ItemIngredientState extends State<ItemIngredient> {
       ),
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
-          decoration: new BoxDecoration(border: new Border(right: new BorderSide(width: 1.0, color: Colors.white24))),
+          padding: const EdgeInsets.only(right: 12.0),
+          decoration: BoxDecoration(border: new Border(right: BorderSide(width: 1.0, color: Colors.white24))),
           child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${widget.ingredients_list[widget.index].image}')),
-
-          //  Icon(Icons.autorenew, color: Colors.white),
         ),
         title: Text(
           widget.ingredients_list[widget.index].name,
           style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.bold),
         ),
-        // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
         subtitle: Row(
           children: <Widget>[
             Icon(
@@ -64,20 +60,7 @@ class _ItemIngredientState extends State<ItemIngredient> {
           ),
           tooltip: 'Supprimer du frigo',
           onPressed: () {
-            print("Ingrédient supprimé : ${widget.ingredients_list[widget.index].id}");
             context.read<FridgeBloc>().add(FridgeDeleteIngredientEvent(ingredientId: widget.ingredients_list[widget.index].id));
-            // BlocProvider.of<FridgeBloc>(context).add(FridgeDeleteIngredientEvent(ingredientId: widget.ingredients_list[widget.index].id))
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   const SnackBar(
-            //     behavior: SnackBarBehavior.floating,
-            //     backgroundColor: Colors.red,
-            //     content: Text(
-            //       "Suppression effectuée",
-            //       textAlign: TextAlign.center,
-            //       style: TextStyle(fontSize: 20),
-            //     ),
-            //   ),
-            // );
           },
         ),
       ),
