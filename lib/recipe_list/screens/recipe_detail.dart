@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/screens/recipe_step_by_step.dart';
 
 class RecipeDetailView extends StatefulWidget {
   RecipeDetailView({Key? key, required this.recipe}) : super(key: key);
@@ -374,6 +375,11 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                       child: const Text('Au fourneaux !'),
                       onPressed: () {
                         print("futur mode réalisation");
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const StepByStepView()),
+                        );
                       },
                     ),
                   ),

@@ -85,7 +85,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                                   child: ListView(
                                     controller: _scrollController,
                                     children: [
-                                      for (var i = 0; i < state.ingredient_list.length; i++) ItemIngredient(state.ingredient_list, i),
+                                      for (var i = 0; i < state.ingredient_list.length; i++) ItemIngredient(state.ingredient_list, i, state.units),
                                     ],
                                   ),
                                 ),
@@ -135,10 +135,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
                           ],
                         );
                       } else {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Color(0xFFfffdf7),
-                            color: Color(0xFFCA2525),
+                        return Container(
+                          height: height * 0.9,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Color(0xFFfffdf7),
+                              color: Color(0xFFCA2525),
+                            ),
                           ),
                         );
                       }

@@ -55,36 +55,24 @@ Future<void> _showMyDialog(context, ingredient) async {
             child: Column(
               children: [
                 Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${ingredient['image']}')),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: width * 0.4,
-                      height: height * 0.4,
-                      child: CustomQuantityField(),
-                    ),
-                    SizedBox(
-                      width: width * 0.4,
-                      height: height * 0.4,
-                      child: SelectFormField(
-                          type: SelectFormFieldType.dropdown,
-                          controller: _controller,
-                          //initialValue: _initialValue,
-                          icon: const Icon(Icons.format_shapes),
-                          labelText: 'Unitée',
-                          changeIcon: true,
-                          dialogTitle: 'Selectionnée une unitée',
-                          dialogCancelBtn: 'Annuler',
-                          enableSearch: false,
-                          dialogSearchHint: 'Rechercher une unitée',
-                          items: _items,
-                          onChanged: (val) {
-                            _valueChanged = val;
-                          },
-                          validator: (val) {},
-                          onSaved: (val) {}),
-                    ),
-                  ],
-                ),
+                CustomQuantityField(),
+                SelectFormField(
+                    type: SelectFormFieldType.dropdown,
+                    controller: _controller,
+                    //initialValue: _initialValue,
+                    icon: const Icon(Icons.format_shapes),
+                    labelText: 'Unitée',
+                    changeIcon: true,
+                    dialogTitle: 'Selectionnée une unitée',
+                    dialogCancelBtn: 'Annuler',
+                    enableSearch: false,
+                    dialogSearchHint: 'Rechercher une unitée',
+                    items: _items,
+                    onChanged: (val) {
+                      _valueChanged = val;
+                    },
+                    validator: (val) {},
+                    onSaved: (val) {}),
               ],
             ),
           ),
@@ -101,17 +89,17 @@ Future<void> _showMyDialog(context, ingredient) async {
 
                 context.read<FridgeBloc>().add(FridgeAddIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: ingredient['id']));
                 Navigator.pop(context, 'Ajouter');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.green,
-                    content: Text(
-                      "Ajout effectuer",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                );
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   SnackBar(
+                //     behavior: SnackBarBehavior.floating,
+                //     backgroundColor: Colors.green,
+                //     content: Text(
+                //       "Ajout effectuer",
+                //       textAlign: TextAlign.center,
+                //       style: TextStyle(fontSize: 20),
+                //     ),
+                //   ),
+                // );
               }
             },
             child: const Text('Ajouter'),

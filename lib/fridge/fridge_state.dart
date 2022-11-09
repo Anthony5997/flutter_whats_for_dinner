@@ -15,7 +15,8 @@ class FridgeLoadedState extends FridgeState {
   Fridge fridge;
   List<Ingredient> ingredient_list;
   dynamic status;
-  FridgeLoadedState(this.fridge, this.ingredient_list, {this.status});
+  dynamic units;
+  FridgeLoadedState(this.fridge, this.ingredient_list, this.units, {this.status});
 }
 
 class FridgeEmptyState extends FridgeState {}

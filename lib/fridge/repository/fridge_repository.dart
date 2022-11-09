@@ -37,6 +37,12 @@ class FridgeRepository {
     return response;
   }
 
+  Future<dynamic> updateIngredientFridge(array) async {
+    var response = {"response": await _helper.postAuthUpdateIngredientInFridge("/fridge/updateIngredient", array[0]), "fridge": await getUserFridge()};
+
+    return response;
+  }
+
   Future<Fridge> deleteIngredientFridge(array) async {
     await _helper.postAuthDeleteIngredientInFridge("/fridge/deleteIngredient", array[0]);
     Fridge fridge = await getUserFridge();

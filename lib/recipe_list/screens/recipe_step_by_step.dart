@@ -6,28 +6,32 @@ import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart'
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 import 'package:flutter_whats_for_dinner/widgets/itemRecipe.dart';
 
-class RecipeListView extends StatefulWidget {
-  const RecipeListView({Key? key}) : super(key: key);
+class StepByStepView extends StatefulWidget {
+  const StepByStepView({Key? key}) : super(key: key);
   @override
-  State<RecipeListView> createState() => _RecipeListViewState();
+  State<StepByStepView> createState() => _StepByStepViewState();
 }
 
-class _RecipeListViewState extends State<RecipeListView> {
+class _StepByStepViewState extends State<StepByStepView> {
   RecipeListRepository recipeListRepository = RecipeListRepository();
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recette'),
+        title: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
         centerTitle: true,
       ),
       // backgroundColor: themeColor['principale'],
       drawer: CustomDrawer(),
       body: BlocProvider<RecipeListBloc>(
-        create: (context) => RecipeListBloc()..add(RecipeListEventInitial()),
+        create: (context) => RecipeListBloc()..add(RecipeFavoriteListEvent()),
         child: BlocBuilder<RecipeListBloc, RecipeListState>(
           builder: (context, state) {
             return ListView(
@@ -35,35 +39,16 @@ class _RecipeListViewState extends State<RecipeListView> {
               children: <Widget>[
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
-                      child: Container(
-                        width: width * 0.85,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Recherchez parmis toutes nos recette ...',
-                            suffixIcon: Icon(Icons.search),
-                          ),
-                          onChanged: (saisis) {
-                            print('First text field: $saisis');
-                            BlocProvider.of<RecipeListBloc>(context).add(RecipeListOnChangeEvent(
-                              saisis: saisis,
-                            ));
-                          },
-                        ),
-                      ),
-                    ),
                     Center(
                       child: SizedBox(
                         child: Column(
                           children: [
-                            if (state is RecipeListLoadedState)
+                            if (state is RecipeListFavoriteLoadedState)
                               Column(
                                 children: [
                                   Container(
-                                    width: width * 0.85,
-                                    height: state.recipeResult.length == 1 ? height * 0.50 : height * 0.75,
+                                    width: width,
+                                    height: state.recipeResult.length == 1 ? height * 0.50 : height * 0.8,
                                     // decoration: styleBox(),
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 0),
@@ -90,12 +75,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                                       ),
                                     ),
                                   ),
-                                  ElevatedButton(
-                                    child: const Text("What's for dinner ?"),
-                                    onPressed: () {
-                                      BlocProvider.of<RecipeListBloc>(context).add(RecipeListLoadingEvent());
-                                    },
-                                  ),
+                                  Text("Aucune recette favorite pour l'instant !")
                                 ],
                               ),
                             if (state is RecipeListLoadingState)

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_whats_for_dinner/authentication/repository/authentication_repository.dart';
 import 'package:flutter_whats_for_dinner/fridge/repository/fridge_repository.dart';
+import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/models/Fridge.dart';
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 
@@ -10,7 +11,9 @@ part 'fridge_state.dart';
 
 class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
   final AuthenticationRepository authenticationRepository = AuthenticationRepository();
+  IngredientCategoryRepository ingredientCategoryRepository = IngredientCategoryRepository();
 
+  List<dynamic> units = [];
   final FridgeRepository fridgeRepository = FridgeRepository();
   FridgeBloc() : super(FridgeInitial()) {
     on<FridgeEvent>((event, emit) {});
@@ -29,7 +32,29 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
             "unit": event.unit,
           }
         ]);
-        emit(FridgeLoadedState(fridgeResponse["fridge"], fridgeResponse["fridge"]["ingredients_list"], status: fridgeResponse["response"]));
+        emit(FridgeLoadedState(fridgeResponse["fridge"], fridgeResponse["fridge"]["ingredients_list"], units, status: fridgeResponse["response"]));
+      } catch (e) {
+        emit(FridgeErrorState());
+      }
+    });
+
+    on<FridgeModifyIngredientEvent>((event, emit) async {
+      emit(FridgeLoadingState());
+      try {
+        Fridge fridge = await fridgeRepository.getUserFridge();
+
+        var fridgeResponse = await fridgeRepository.updateIngredientFridge([
+          {
+            "fridgeId": fridge.id,
+            "ingredientId": event.ingredientId,
+            "quantity": event.quantity,
+            "unit": event.unit,
+          }
+        ]);
+
+        print("fridgeResponse");
+        print(fridgeResponse["fridge"].ingredients_list);
+        emit(FridgeLoadedState(fridgeResponse["fridge"], fridgeResponse["fridge"].ingredients_list, units, status: fridgeResponse["response"]));
       } catch (e) {
         emit(FridgeErrorState());
       }
@@ -49,7 +74,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
         ]);
 
         if (fridge.ingredients_list.length > 0) {
-          emit(FridgeLoadedState(fridge, fridge.ingredients_list));
+          emit(FridgeLoadedState(fridge, fridge.ingredients_list, units));
         } else {
           emit(FridgeEmptyState());
         }
@@ -60,11 +85,12 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
 
     on<FridgeLoadingEvent>((event, emit) async {
       try {
+        units = await ingredientCategoryRepository.getAllUnits();
         final fridge = await fridgeRepository.getUserFridge();
         if (fridge.ingredients_list.length == 0) {
           emit(FridgeEmptyState());
         } else {
-          emit(FridgeLoadedState(fridge, fridge.ingredients_list));
+          emit(FridgeLoadedState(fridge, fridge.ingredients_list, units));
         }
       } catch (e) {
         emit(FridgeEmptyState());
@@ -77,7 +103,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
       if (event.saisis.length == 0) {
         try {
           final fridge = event.fridge;
-          emit(FridgeLoadedState(fridge, fridge.ingredients_list));
+          emit(FridgeLoadedState(fridge, fridge.ingredients_list, units));
         } catch (e) {
           emit(FridgeEmptyState());
         }
@@ -94,7 +120,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
           emit(FridgeNoResultsState(fridge: event.fridge, saisis: event.saisis, ingredient_list: ingredientFound));
         } else {
           var fridge = new Fridge(id: event.fridge.id, ingredients_list: event.fridge.ingredients_list);
-          emit(FridgeLoadedState(fridge, ingredientFound));
+          emit(FridgeLoadedState(fridge, ingredientFound, units));
         }
       }
     });
@@ -109,7 +135,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
         if (fridge.ingredients_list.length == 0) {
           emit(FridgeEmptyState());
         } else {
-          emit(FridgeLoadedState(fridge, fridge.ingredients_list));
+          emit(FridgeLoadedState(fridge, fridge.ingredients_list, units));
         }
       } catch (e) {
         emit(FridgeEmptyState());

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
+import 'package:flutter_whats_for_dinner/Session/session_view.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/screen/login_view.dart';
 import 'package:flutter_whats_for_dinner/fridge/screens/fridge_view.dart';
@@ -33,7 +34,7 @@ class _SessionNavigatorState extends State<SessionNavigator> {
                 if (state is SessionInitial) MaterialPage(child: FridgeScreen()),
                 if (state is SessionLoadingState) MaterialPage(child: LoadingScreenSession()),
                 if (state is SessionFavoriteState) MaterialPage(child: FavoriteRecipeListView()),
-                if (state is SessionProfileState) MaterialPage(child: LoadingScreenSession()),
+                if (state is SessionProfileState) MaterialPage(child: SessionView()),
                 if (state is SessionPageSelectedState) MaterialPage(child: LoadingScreen()),
                 if (state is SessionIngredientCategoryState) MaterialPage(child: IngredientCategorieView()),
                 if (state is SessionRecipeListState) MaterialPage(child: RecipeListView()),

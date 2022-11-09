@@ -28,6 +28,14 @@ class FridgeAddIngredientEvent extends FridgeEvent {
   final int ingredientId;
 }
 
+class FridgeModifyIngredientEvent extends FridgeEvent {
+  const FridgeModifyIngredientEvent({required this.ingredientId, required this.quantity, required this.unit});
+
+  final String quantity;
+  final String? unit;
+  final int ingredientId;
+}
+
 class FridgeDeleteIngredientEvent extends FridgeEvent {
   const FridgeDeleteIngredientEvent({required this.ingredientId});
 

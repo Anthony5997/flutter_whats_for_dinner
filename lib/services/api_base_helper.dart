@@ -100,6 +100,32 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> postAuthUpdateIngredientInFridge(String url, array) async {
+    dynamic responseJson;
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, String>{
+          'fridgeId': array['fridgeId'].toString(),
+          'ingredientId': array['ingredientId'].toString(),
+          'quantity': array['quantity'].toString(),
+          'unit': array['unit'].toString(),
+        }),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
   Future<dynamic> postAuthDeleteIngredientInFridge(String url, array) async {
     dynamic responseJson;
 
@@ -311,8 +337,8 @@ class ApiBaseHelper {
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body.toString());
-        // print("responseJson");
-        // print(responseJson);
+        print("responseJson");
+        print(responseJson);
 
         return responseJson;
       case 400:

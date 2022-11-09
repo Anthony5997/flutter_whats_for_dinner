@@ -74,10 +74,13 @@ class _FavoriteRecipeListViewState extends State<FavoriteRecipeListView> {
                                 ],
                               ),
                             if (state is RecipeListLoadingState)
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Color(0xFFfffdf7),
-                                  color: Color(0xFFCA2525),
+                              Container(
+                                height: height * 0.8,
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: Color(0xFFfffdf7),
+                                    color: Color(0xFFCA2525),
+                                  ),
                                 ),
                               ),
                           ],
