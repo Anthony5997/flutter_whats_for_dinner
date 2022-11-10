@@ -25,7 +25,8 @@ class IngredientByCategorieScreen extends StatelessWidget {
                   return ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Color.fromRGBO(120, 120, 120, 0),
-                      child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${ingredient[index]["image"]}')),
+                      child: Image.network(Uri.encodeFull(
+                          'http://laravel_whats_for_dinner.test/${ingredient[index]["image"]}')),
                     ),
                     title: Text(ingredient[index]["name"]),
                     subtitle: Text(ingredient[index]["name"]),

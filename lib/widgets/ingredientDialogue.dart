@@ -54,7 +54,7 @@ Future<void> _showMyDialog(context, ingredient) async {
             key: formKey,
             child: Column(
               children: [
-                Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${ingredient['image']}')),
+                Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${ingredient['image']}')),
                 CustomQuantityField(),
                 SelectFormField(
                     type: SelectFormFieldType.dropdown,

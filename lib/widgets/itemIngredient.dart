@@ -9,7 +9,9 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class ItemIngredient extends StatefulWidget {
-  ItemIngredient(List<Ingredient> this.ingredients_list, int this.index, this.units) : super();
+  ItemIngredient(
+      List<Ingredient> this.ingredients_list, int this.index, this.units)
+      : super();
 
   List<Ingredient> ingredients_list;
   int index;
@@ -65,15 +67,22 @@ class _ItemIngredientState extends State<ItemIngredient> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
               leading: Container(
                 padding: const EdgeInsets.only(right: 12.0),
-                decoration: BoxDecoration(border: new Border(right: BorderSide(width: 1.0, color: Colors.white24))),
-                child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/assets/ingredients/${widget.ingredients_list[widget.index].image}')),
+                decoration: BoxDecoration(
+                    border: new Border(
+                        right: BorderSide(width: 1.0, color: Colors.white24))),
+                child: Image.network(Uri.encodeFull(
+                    'http://laravel_whats_for_dinner.test/${widget.ingredients_list[widget.index].image}')),
               ),
               title: Text(
                 widget.ingredients_list[widget.index].name,
-                style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w600, fontSize: 14),
+                style: TextStyle(
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14),
               ),
               subtitle: Row(
                 children: <Widget>[
@@ -82,7 +91,10 @@ class _ItemIngredientState extends State<ItemIngredient> {
                   //   color: Colors.red[900],
                   // ),
                   Text(
-                    widget.ingredients_list[widget.index].quantity.toString() + " " + widget.ingredients_list[widget.index].unit_name.toString(),
+                    widget.ingredients_list[widget.index].quantity.toString() +
+                        " " +
+                        widget.ingredients_list[widget.index].unit_name
+                            .toString(),
                     style: TextStyle(
                       color: Colors.red[900],
                     ),
@@ -110,7 +122,10 @@ class _ItemIngredientState extends State<ItemIngredient> {
                     ),
                     tooltip: 'Supprimer du frigo',
                     onPressed: () {
-                      BlocProvider.of<FridgeBloc>(context).add(FridgeDeleteIngredientEvent(ingredientId: widget.ingredients_list[widget.index].id));
+                      BlocProvider.of<FridgeBloc>(context).add(
+                          FridgeDeleteIngredientEvent(
+                              ingredientId:
+                                  widget.ingredients_list[widget.index].id));
                     },
                   ),
                 ],
@@ -125,19 +140,25 @@ class _ItemIngredientState extends State<ItemIngredient> {
                     FormBuilder(
                       key: formKey,
                       child: Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 10, left: 5, right: 5),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 10, left: 5, right: 5),
                               width: width * 0.25,
                               child: FormBuilderTextField(
-                                initialValue: widget.ingredients_list[widget.index].quantity.toString(),
+                                initialValue: widget
+                                    .ingredients_list[widget.index].quantity
+                                    .toString(),
                                 name: "quantity",
                                 validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(errorText: "Champ vide."),
-                                  FormBuilderValidators.integer(errorText: "Champ invalide."),
+                                  FormBuilderValidators.required(
+                                      errorText: "Champ vide."),
+                                  FormBuilderValidators.integer(
+                                      errorText: "Champ invalide."),
                                 ]),
                                 keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
@@ -148,7 +169,8 @@ class _ItemIngredientState extends State<ItemIngredient> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 10, left: 5, right: 5),
                               width: width * 0.25,
                               child: SelectFormField(
                                   type: SelectFormFieldType.dropdown,
@@ -186,7 +208,13 @@ class _ItemIngredientState extends State<ItemIngredient> {
                           onPressed: () async {
                             if (formKey.currentState?.validate() == true) {
                               formKey.currentState!.save();
-                              context.read<FridgeBloc>().add(FridgeModifyIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: widget.ingredients_list[widget.index].id));
+                              context.read<FridgeBloc>().add(
+                                  FridgeModifyIngredientEvent(
+                                      quantity: formKey
+                                          .currentState?.value['quantity'],
+                                      unit: _valueChanged,
+                                      ingredientId: widget
+                                          .ingredients_list[widget.index].id));
                               setState(() {
                                 _visibility = false;
                               });
