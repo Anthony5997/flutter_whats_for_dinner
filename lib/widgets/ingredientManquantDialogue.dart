@@ -40,8 +40,7 @@ Future<void> _showMyDialog(context, ingredients) async {
                 child: Row(
                   children: [
                     Image.network(
-                      Uri.encodeFull(
-                          'http://laravel_whats_for_dinner.test/${ingredients[i].image}'),
+                      Uri.encodeFull('http://laravel_whats_for_dinner.test/${ingredients[i].image}'),
                       width: 35,
                       height: 35,
                     ),

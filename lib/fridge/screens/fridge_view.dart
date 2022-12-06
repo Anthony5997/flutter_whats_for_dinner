@@ -43,7 +43,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
       body: BlocProvider<FridgeBloc>(
         create: (context) => FridgeBloc()..add(FridgeLoadingEvent()),
         child: ListView(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 20),
           children: <Widget>[
             Column(
               children: [
@@ -54,7 +54,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         return Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
+                              padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 20),
                               child: Container(
                                 width: width * 0.85,
                                 child: TextField(
@@ -71,16 +71,17 @@ class _FridgeScreenState extends State<FridgeScreen> {
                               ),
                             ),
                             Container(
-                              width: width * 0.85,
+                              width: width * 0.88,
                               height: state.fridge.ingredients_list.length == 1 ? height * 0.30 : height * 0.65,
                               // decoration: styleBox(),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                                 child: Scrollbar(
-                                  thumbVisibility: true,
-                                  thickness: 10,
+                                  thumbVisibility: false,
+                                  trackVisibility: false,
+                                  thickness: 0,
                                   radius: const Radius.circular(10),
-                                  interactive: true,
+                                  interactive: false,
                                   controller: _scrollController,
                                   child: ListView(
                                     controller: _scrollController,
@@ -94,14 +95,31 @@ class _FridgeScreenState extends State<FridgeScreen> {
                           ],
                         );
                       } else if (state is FridgeEmptyState) {
-                        return const Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
-                            child: Text(
-                              "Votre frigo est vide, remplisser le !",
-                              style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
+                                child: Image.asset(
+                                  'assets/images/empty-fridge.png',
+                                  width: width > 550 ? 400 : 300,
+                                  height: width > 550 ? 400 : 300,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
-                          ),
+                            Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
+                                child: Text(
+                                  "Votre frigo est vide, remplisser le !",
+                                  style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       } else if (state is FridgeNoResultsState) {
                         return Column(
@@ -136,7 +154,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         );
                       } else {
                         return Container(
-                          height: height * 0.9,
+                          height: height * 0.7,
                           child: const Center(
                             child: CircularProgressIndicator(
                               backgroundColor: Color(0xFFfffdf7),

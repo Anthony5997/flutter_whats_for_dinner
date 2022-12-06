@@ -27,6 +27,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.recipe.image);
     double pertinenceRatio = 0;
     if (widget.recipe.pertinence <= 9) {
       pertinenceRatio = double.parse('0.0${widget.recipe.pertinence}');
@@ -45,14 +46,26 @@ class _ItemRecipeState extends State<ItemRecipe> {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.transparent,
-            ),
-            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.white,
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10), bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 8), // changes position of shadow
+              ),
+            ],
           ),
+          // decoration: BoxDecoration(
+          //   border: Border.all(
+          //     color: Colors.transparent,
+          //   ),
+          //   borderRadius: BorderRadius.circular(10.0),
+          // ),
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,10 +79,9 @@ class _ItemRecipeState extends State<ItemRecipe> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      Uri.encodeFull(
-                          'http://laravel_whats_for_dinner.test/${widget.recipe.image}'),
+                      Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.recipe.image}'),
                       width: width > 500 ? 220.0 : width * 0.38,
-                      height: 180.0,
+                      height: 220.0,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -114,8 +126,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, bottom: 8, left: 4, right: 0),
+                          padding: const EdgeInsets.only(top: 8, bottom: 8, left: 4, right: 0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,8 +145,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(children: [
                             widget.recipe.ingredients_missing_list.length != 0
-                                ? Text(
-                                    "Manquants : ${widget.recipe.ingredients_list.length}",
+                                ? Text("Manquants : ${widget.recipe.ingredients_missing_list.length}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ))
@@ -150,8 +160,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                     Icons.check,
                                     color: Colors.green[800],
                                   )
-                                : MissingIngredientButtonDialog(
-                                    widget.recipe.ingredients_missing_list),
+                                : MissingIngredientButtonDialog(widget.recipe.ingredients_missing_list),
                           ]),
                         ),
                         Center(
@@ -164,8 +173,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                 Row(
                                   children: [
                                     Text(
-                                      widget.recipe.preparation_minutes
-                                          .toString(),
+                                      widget.recipe.preparation_minutes.toString(),
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -180,8 +188,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                                   children: [
                                     Text(
                                       widget.recipe.cooking_minutes.toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontWeight: FontWeight.bold),
                                     ),
                                     const Icon(Icons.gas_meter_outlined),
                                   ],
@@ -214,11 +221,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                         percent: pertinenceRatio,
                         center: Text(
                           "${widget.recipe.pertinence.toString()}%",
-                          style: const TextStyle(
-                              fontFamily: "LemonDays",
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white),
+                          style: const TextStyle(fontFamily: "LemonDays", fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
                         ),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.redAccent,

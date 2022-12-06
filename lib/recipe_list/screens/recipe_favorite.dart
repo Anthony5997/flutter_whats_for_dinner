@@ -4,7 +4,7 @@ import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart'
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
-import 'package:flutter_whats_for_dinner/widgets/itemRecipe.dart';
+import 'package:flutter_whats_for_dinner/widgets/itemRecipeFavorite.dart';
 
 class FavoriteRecipeListView extends StatefulWidget {
   const FavoriteRecipeListView({Key? key}) : super(key: key);
@@ -34,6 +34,25 @@ class _FavoriteRecipeListViewState extends State<FavoriteRecipeListView> {
               children: <Widget>[
                 Column(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
+                      child: Container(
+                        width: width * 0.85,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Recherchez parmis toutes nos recette ...',
+                            suffixIcon: Icon(Icons.search),
+                          ),
+                          onChanged: (saisis) {
+                            print('First text field: $saisis');
+                            BlocProvider.of<RecipeListBloc>(context).add(RecipeListOnChangeEvent(
+                              saisis: saisis,
+                            ));
+                          },
+                        ),
+                      ),
+                    ),
                     Center(
                       child: SizedBox(
                         child: Column(
@@ -49,7 +68,7 @@ class _FavoriteRecipeListViewState extends State<FavoriteRecipeListView> {
                                       padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 0),
                                       child: ListView(
                                         children: [
-                                          for (var i = 0; i < state.recipeResult.length; i++) ItemRecipe(state.recipeResult[i]),
+                                          for (var i = 0; i < state.recipeResult.length; i++) ItemRecipeFavorite(state.recipeResult[i]),
                                         ],
                                       ),
                                     ),

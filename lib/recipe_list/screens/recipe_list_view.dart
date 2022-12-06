@@ -62,11 +62,11 @@ class _RecipeListViewState extends State<RecipeListView> {
                               Column(
                                 children: [
                                   Container(
-                                    width: width * 0.85,
+                                    width: width * 0.9,
                                     height: state.recipeResult.length == 1 ? height * 0.50 : height * 0.75,
                                     // decoration: styleBox(),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 0),
+                                      padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 8),
                                       child: ListView(
                                         children: [
                                           for (var i = 0; i < state.recipeResult.length; i++) ItemRecipe(state.recipeResult[i]),

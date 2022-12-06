@@ -20,7 +20,6 @@ class IngredientCategorieView extends StatelessWidget {
           onPressed: () => BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(0)),
         ),
       ),
-      endDrawer: CustomDrawer(),
       body: BlocProvider<IngredientCategorieBloc>(
         create: (context) => IngredientCategorieBloc()..add(IngredientCategorieLoadingEvent()),
         child: Column(

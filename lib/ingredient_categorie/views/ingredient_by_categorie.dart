@@ -8,9 +8,13 @@ class IngredientByCategorieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ingredient);
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 35,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -25,8 +29,7 @@ class IngredientByCategorieScreen extends StatelessWidget {
                   return ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Color.fromRGBO(120, 120, 120, 0),
-                      child: Image.network(Uri.encodeFull(
-                          'http://laravel_whats_for_dinner.test/${ingredient[index]["image"]}')),
+                      child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${ingredient[index]["image"]}')),
                     ),
                     title: Text(ingredient[index]["name"]),
                     subtitle: Text(ingredient[index]["name"]),

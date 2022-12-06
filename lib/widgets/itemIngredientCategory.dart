@@ -12,8 +12,7 @@ class ItemIngredientCategory extends StatefulWidget {
 }
 
 class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
-  IngredientCategoryRepository ingredientCategoryRepository =
-      IngredientCategoryRepository();
+  IngredientCategoryRepository ingredientCategoryRepository = IngredientCategoryRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +21,12 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
     return Container(
       child: GestureDetector(
         onTap: () async {
-          var ingredientCategorieList = await ingredientCategoryRepository
-              .getById(widget.ingredients_list['id'].toString());
+          var ingredientCategorieList = await ingredientCategoryRepository.getById(widget.ingredients_list['id'].toString());
 
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => IngredientByCategorieScreen(
-                  ingredient: ingredientCategorieList["results"]),
+              builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList["results"]),
             ),
           );
         },
@@ -37,22 +34,17 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
           padding: const EdgeInsets.all(8),
           child: Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-                border: Border.all(width: 3, color: Colors.red),
-                borderRadius: BorderRadius.circular(15)),
+            decoration: BoxDecoration(border: Border.all(width: 2, color: Colors.red), borderRadius: BorderRadius.circular(15)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.network(
-                  Uri.encodeFull(
-                      'http://laravel_whats_for_dinner.test/${widget.ingredients_list['image']}'),
+                  Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.ingredients_list['image']}'),
                   width: width * 0.15,
                   height: height * 0.15,
                 ),
-                width > 650
-                    ? Text(widget.ingredients_list['name'])
-                    : Container(),
+                width > 650 ? Text(widget.ingredients_list['name']) : Container(),
               ],
             ),
           ),

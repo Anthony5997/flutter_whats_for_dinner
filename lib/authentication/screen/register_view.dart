@@ -75,7 +75,7 @@ class RegisterView extends StatelessWidget {
     return SafeArea(
       child: TextButton(
           child: const Text(
-            'Vous n\'avez pas encore de compte ? Inscrivez vous !',
+            'Vous possedez déjà un compte ? Connectez vous.',
             textAlign: TextAlign.center,
           ),
           onPressed: () {

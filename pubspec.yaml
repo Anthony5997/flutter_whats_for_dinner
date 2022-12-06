@@ -43,6 +43,7 @@ dependencies:
   form_builder_validators: ^8.3.0
   select_form_field: ^2.2.0
   percent_indicator: ^4.2.2
+  swipe_to: ^1.0.2
   
 
 dev_dependencies:
@@ -74,6 +75,7 @@ flutter:
   assets:
     - assets/images/logo-genial.png
     - assets/images/cooking-pot.png
+    - assets/images/empty-fridge.png
     - assets/images/icons/ble.png
     - assets/images/icons/lait.png
     - assets/images/icons/vegan.png

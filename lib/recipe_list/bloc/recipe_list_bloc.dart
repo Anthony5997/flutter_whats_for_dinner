@@ -42,11 +42,16 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
     });
 
     on<RecipeFavoriteListEvent>((event, emit) async {
-      emit(RecipeListLoadingState());
+      // emit(RecipeListLoadingState());
 
       try {
         var recipeResult = await recipeListRepository.getFavorites();
-        emit(RecipeListFavoriteLoadedState(recipeResult));
+
+        if (recipeResult.length > 0) {
+          emit(RecipeListFavoriteLoadedState(recipeResult));
+        } else {
+          emit(RecipeListEmptyState());
+        }
       } catch (e) {
         emit(RecipeListEmptyState());
       }

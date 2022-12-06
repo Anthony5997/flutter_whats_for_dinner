@@ -71,7 +71,7 @@ class LoginView extends StatelessWidget {
   Widget _showSignUpButton(BuildContext context) {
     return SafeArea(
       child: TextButton(
-          child: const Text('Vous possedez déjà un compte ? Connectez vous.', textAlign: TextAlign.center),
+          child: const Text('Vous n\'avez pas encore de compte ? Inscrivez vous !', textAlign: TextAlign.center),
           onPressed: () {
             context.read<AuthenticationBloc>().add(ShowRegisterEvent());
           }),

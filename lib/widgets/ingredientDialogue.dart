@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/quantity_field.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/customSnackbar.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class AddIngredientButtonDialog extends StatelessWidget {
@@ -89,17 +90,7 @@ Future<void> _showMyDialog(context, ingredient) async {
 
                 context.read<FridgeBloc>().add(FridgeAddIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: ingredient['id']));
                 Navigator.pop(context, 'Ajouter');
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   SnackBar(
-                //     behavior: SnackBarBehavior.floating,
-                //     backgroundColor: Colors.green,
-                //     content: Text(
-                //       "Ajout effectuer",
-                //       textAlign: TextAlign.center,
-                //       style: TextStyle(fontSize: 20),
-                //     ),
-                //   ),
-                // );
+                ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(context, "${ingredient['name']} ajouté", Colors.green));
               }
             },
             child: const Text('Ajouter'),

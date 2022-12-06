@@ -24,8 +24,10 @@ class SessionView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text('Session View'),
+              // const Text(_userPreferences.getString("nickname")),
               TextButton(child: const Text('sign out'), onPressed: () => context.read<AuthenticationBloc>().add(LogoutEvent())),
             ],
           ),

@@ -39,7 +39,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
     });
 
     on<FridgeModifyIngredientEvent>((event, emit) async {
-      emit(FridgeLoadingState());
+      // emit(FridgeLoadingState());
       try {
         Fridge fridge = await fridgeRepository.getUserFridge();
 
@@ -61,7 +61,7 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
     });
 
     on<FridgeDeleteIngredientEvent>((event, emit) async {
-      emit(FridgeLoadingState());
+      // emit(FridgeLoadingState());
 
       try {
         Fridge fridge = await fridgeRepository.getUserFridge();

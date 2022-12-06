@@ -61,8 +61,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                           width: width,
                           height: 250,
                           child: Image.network(
-                            Uri.encodeFull(
-                                'http://laravel_whats_for_dinner.test/${widget.recipe.image}'),
+                            Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.recipe.image}'),
                             fit: BoxFit.cover,
                           )),
                       Padding(
@@ -91,14 +90,10 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20.0, left: 8, right: 8, bottom: 15),
+                    padding: const EdgeInsets.only(top: 20.0, left: 8, right: 8, bottom: 15),
                     child: Text(
                       widget.recipe.title,
-                      style: TextStyle(
-                          color: Colors.red[900],
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20),
+                      style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w400, fontSize: 20),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -111,14 +106,10 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                   ),
                   Container(
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 20.0, left: 8, right: 8, bottom: 20),
+                      padding: const EdgeInsets.only(top: 20.0, left: 8, right: 8, bottom: 20),
                       child: Text(
                         "Description :",
-                        style: TextStyle(
-                            color: Colors.red[900],
-                            fontWeight: FontWeight.w400,
-                            fontSize: 20),
+                        style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w400, fontSize: 20),
                         textAlign: TextAlign.start,
                       ),
                     ),
@@ -220,8 +211,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20.0, left: 8, right: 8, bottom: 20),
+                    padding: const EdgeInsets.only(top: 20.0, left: 8, right: 8, bottom: 20),
                     child: Text(
                       "Ingrédients :",
                       style: TextStyle(color: Colors.red[900]),
@@ -234,25 +224,20 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        for (var i = 0;
-                            i < widget.recipe.ingredients_list.length;
-                            i++)
+                        for (var i = 0; i < widget.recipe.ingredients_list.length; i++)
                           Container(
                             width: 120,
-                            margin: EdgeInsets.only(
-                                left: 14.0, right: 14, bottom: 20),
+                            margin: EdgeInsets.only(left: 14.0, right: 14, bottom: 20),
                             child: Column(
                               children: [
                                 Container(
                                   width: 90,
                                   height: 90,
-                                  margin: EdgeInsets.only(
-                                      left: 14.0, right: 14, bottom: 10),
+                                  margin: EdgeInsets.only(left: 14.0, right: 14, bottom: 10),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.network(
-                                      Uri.encodeFull(
-                                          'http://laravel_whats_for_dinner.test/${widget.recipe.ingredients_list[i].image}'),
+                                      Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.recipe.ingredients_list[i].image}'),
                                       width: 60,
                                       height: 80,
                                       fit: BoxFit.fill,
@@ -291,95 +276,119 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                       ),
                       padding: EdgeInsets.all(6),
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8.0, left: 8, right: 8, bottom: 15),
+                        padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8, bottom: 15),
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
+                              padding: const EdgeInsets.only(top: 5.0, bottom: 20),
                               child: Text(
                                 "Préparation",
-                                style: TextStyle(
-                                    color: Colors.red[900],
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20),
+                                style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w400, fontSize: 20),
                                 textAlign: TextAlign.start,
                               ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  padding: EdgeInsets.all(6),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/icons/chronometre.png',
-                                        width: 20,
-                                        height: 20,
+                                Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 2.0),
-                                        child: Text(
-                                            "${widget.recipe.preparation_minutes.toString()}m"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  padding: EdgeInsets.all(6),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/icons/cuisson.png',
-                                        width: 20,
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 2.0),
-                                        child: Text(
-                                            "${widget.recipe.cooking_minutes.toString()}m"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  padding: EdgeInsets.all(6),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 2.0),
-                                          child: Text(
-                                              "${widget.recipe.ready_in_minutes.toString()}m"),
-                                        ),
-                                        Image.asset(
-                                          'assets/images/icons/vegetarien.png',
-                                          width: 20,
-                                          height: 20,
-                                        ),
-                                      ],
+                                      padding: EdgeInsets.all(6),
+                                      child: Text("Préparation"),
                                     ),
-                                  ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.all(6),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/icons/chronometre.png',
+                                            width: 20,
+                                            height: 20,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 2.0),
+                                            child: Text("${widget.recipe.preparation_minutes.toString()}m"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.all(6),
+                                      child: Text("Cuisson"),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.all(6),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/icons/cuisson.png',
+                                            width: 20,
+                                            height: 20,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 2.0),
+                                            child: Text("${widget.recipe.cooking_minutes.toString()}m"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.all(6),
+                                      child: Text("Totale"),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.all(6),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 2.0),
+                                              child: Text("${widget.recipe.ready_in_minutes.toString()}m"),
+                                            ),
+                                            Image.asset(
+                                              'assets/images/icons/vegetarien.png',
+                                              width: 20,
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -389,32 +398,29 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(top: 20.0, left: 8, right: 8, bottom: 20),
                     child: Text(
                       "Réalisation",
-                      style: TextStyle(
-                          color: Colors.red[900],
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20),
+                      style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.w400, fontSize: 20),
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20),
-                    child: ElevatedButton(
-                      child: const Text('Au fourneaux !'),
-                      onPressed: () {
-                        print("futur mode réalisation");
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 10.0, horizontal: 20),
+                  //   child: ElevatedButton(
+                  //     child: const Text('Au fourneaux !'),
+                  //     onPressed: () {
+                  //       print("futur mode réalisation");
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const StepByStepView()),
-                        );
-                      },
-                    ),
-                  ),
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const StepByStepView()),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -425,9 +431,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                       padding: EdgeInsets.all(6),
                       child: Column(
                         children: [
-                          for (var i = 0;
-                              i < widget.recipe.recipe_steps.length;
-                              i++)
+                          for (var i = 0; i < widget.recipe.recipe_steps.length; i++)
                             Container(
                               width: width * 0.90,
                               margin: EdgeInsets.only(top: 15.0, bottom: 15),
@@ -436,32 +440,23 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                                 color: Color.fromARGB(255, 255, 255, 255),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10.0, left: 8, right: 8, bottom: 10),
+                                padding: const EdgeInsets.only(top: 10.0, left: 8, right: 8, bottom: 10),
                                 child: Row(
                                   children: [
                                     Text(
-                                      widget.recipe.recipe_steps[i].step_number
-                                          .toString(),
-                                      style: TextStyle(
-                                          color: Colors.red[900],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                      textAlign: TextAlign.start,
+                                      widget.recipe.recipe_steps[i].step_number.toString(),
+                                      style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.bold, fontSize: 18),
+                                      textAlign: TextAlign.justify,
                                       softWrap: true,
                                       maxLines: 3,
                                     ),
                                     SizedBox(
                                       width: width * 0.8,
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
+                                        padding: const EdgeInsets.only(left: 8.0),
                                         child: Text(
                                           widget.recipe.recipe_steps[i].step,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14),
+                                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
                                           textAlign: TextAlign.start,
                                           softWrap: true,
                                           maxLines: 10,
