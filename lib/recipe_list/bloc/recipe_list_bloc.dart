@@ -28,8 +28,9 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
 
     on<RecipeListOnChangeEvent>((event, emit) async {
       emit(RecipeListLoadingState());
+      var saisis = await event.saisis.length;
 
-      if (event.saisis.length == 0) {
+      if (saisis == 0) {
         emit(RecipeListEmptyState());
       } else {
         try {

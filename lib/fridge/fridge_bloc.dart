@@ -51,9 +51,6 @@ class FridgeBloc extends Bloc<FridgeEvent, FridgeState> {
             "unit": event.unit,
           }
         ]);
-
-        print("fridgeResponse");
-        print(fridgeResponse["fridge"].ingredients_list);
         emit(FridgeLoadedState(fridgeResponse["fridge"], fridgeResponse["fridge"].ingredients_list, units, status: fridgeResponse["response"]));
       } catch (e) {
         emit(FridgeErrorState());

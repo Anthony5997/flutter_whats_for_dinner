@@ -20,7 +20,7 @@ class _FavoriteRecipeListViewState extends State<FavoriteRecipeListView> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recette'),
+        title: const Text('Mes Favoris'),
         centerTitle: true,
       ),
       // backgroundColor: themeColor['principale'],

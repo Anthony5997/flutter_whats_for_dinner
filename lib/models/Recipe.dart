@@ -2,6 +2,7 @@
 
 import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/models/RecipeStep.dart';
+import 'package:flutter_whats_for_dinner/models/Review.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Recipe.g.dart';
@@ -21,7 +22,11 @@ class Recipe {
   final bool gluten_free;
   final bool dairy_free;
   final int pertinence;
+  final double? user_rating;
+  final double? global_rating;
   bool favorite;
+  bool is_new;
+  final List<Review> reviews_list;
   final List<Ingredient> ingredients_list;
   final List<Ingredient> ingredients_missing_list;
   final List<RecipeStep> recipe_steps;
@@ -42,7 +47,11 @@ class Recipe {
     required this.gluten_free,
     required this.dairy_free,
     required this.pertinence,
+    required this.user_rating,
+    required this.global_rating,
     required this.favorite,
+    required this.is_new,
+    required this.reviews_list,
     required this.ingredients_list,
     required this.ingredients_missing_list,
     required this.recipe_steps,

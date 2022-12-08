@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart
 import 'package:flutter_whats_for_dinner/widgets/inputs/email_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/password_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/messageErreur.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key, required this.formKey, this.error}) : super(key: key);
@@ -19,9 +20,9 @@ class LoginView extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 40,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Connexion',
-          style: TextStyle(fontSize: 24, fontFamily: 'FruitPunch'),
+          style: TextStyle(fontSize: 24, fontFamily: mainFontFamily),
         ),
       ),
       body: SingleChildScrollView(
@@ -36,9 +37,9 @@ class LoginView extends StatelessWidget {
                   'assets/images/logo-genial.png',
                   height: 190,
                 ),
-                const Text(
+                Text(
                   "What's For Dinner",
-                  style: TextStyle(fontFamily: 'FruitPunch', fontSize: 30),
+                  style: TextStyle(fontFamily: mainFontFamily, fontSize: 30),
                 ),
                 const SizedBox(height: 30),
                 if (error != null) MessageErreur(messageErreur: error ?? ''),

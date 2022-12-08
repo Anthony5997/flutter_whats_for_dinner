@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class MessageErreur extends StatelessWidget {
   String messageErreur;
@@ -12,14 +13,14 @@ class MessageErreur extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.red),
+        border: Border.all(color: primaryColor),
         borderRadius: const BorderRadius.all(
           Radius.circular(5.0),
         ),
       ),
       child: Text(
         messageErreur,
-        style: TextStyle(fontSize: 16, color: Colors.red[900]),
+        style: TextStyle(fontSize: 16, color: primaryColor),
       ),
     );
   }

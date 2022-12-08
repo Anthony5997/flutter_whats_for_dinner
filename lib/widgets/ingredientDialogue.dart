@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/quantity_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/customSnackbar.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class AddIngredientButtonDialog extends StatelessWidget {
@@ -13,9 +14,9 @@ class AddIngredientButtonDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(
+      icon: Icon(
         Icons.add_circle,
-        color: Colors.red,
+        color: primaryColor,
         size: 35,
       ),
       tooltip: 'Ajouter au frigo',

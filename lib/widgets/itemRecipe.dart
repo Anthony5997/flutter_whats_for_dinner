@@ -3,6 +3,8 @@ import 'package:flutter_whats_for_dinner/models/Recipe.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/repository/recipe_list_repository.dart';
 import 'package:flutter_whats_for_dinner/recipe_list/screens/recipe_detail.dart';
 import 'package:flutter_whats_for_dinner/widgets/ingredientManquantDialogue.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/customSnackbar.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class ItemRecipe extends StatefulWidget {
@@ -21,6 +23,8 @@ class _ItemRecipeState extends State<ItemRecipe> {
   _toggleFavorite() {
     setState(() {
       widget.recipe.favorite = !widget.recipe.favorite;
+      print(widget.recipe.favorite);
+      widget.recipe.favorite ? ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(context, "Recette Ajoutée", Colors.green)) : ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(context, "Recette retirée", primaryColor));
       _recipeListRepository.favoriteToggle(widget.recipe.id);
     });
   }
@@ -60,12 +64,6 @@ class _ItemRecipeState extends State<ItemRecipe> {
               ),
             ],
           ),
-          // decoration: BoxDecoration(
-          //   border: Border.all(
-          //     color: Colors.transparent,
-          //   ),
-          //   borderRadius: BorderRadius.circular(10.0),
-          // ),
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -81,7 +79,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                     child: Image.network(
                       Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.recipe.image}'),
                       width: width > 500 ? 220.0 : width * 0.38,
-                      height: 220.0,
+                      height: 210.0,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -110,12 +108,12 @@ class _ItemRecipeState extends State<ItemRecipe> {
                               icon: widget.recipe.favorite
                                   ? Icon(
                                       Icons.favorite,
-                                      color: Colors.red,
+                                      color: primaryColor,
                                       size: 24,
                                     )
                                   : Icon(
                                       Icons.favorite_border_outlined,
-                                      color: Colors.red,
+                                      color: primaryColor,
                                       size: 24,
                                     ),
                               tooltip: 'Ajouter au favoris',
@@ -126,7 +124,45 @@ class _ItemRecipeState extends State<ItemRecipe> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8, bottom: 8, left: 4, right: 0),
+                          padding: const EdgeInsets.only(top: 2, bottom: 4, left: 4, right: 0),
+                          child: widget.recipe.global_rating != null
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      widget.recipe.global_rating.toString(),
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Color.fromARGB(255, 255, 226, 59),
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      widget.recipe.reviews_list != null ? "(${widget.recipe.reviews_list.length.toString()})" : "(0)",
+                                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 10),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    Text(
+                                      "Aucun avis pour l'instant",
+                                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12, fontStyle: FontStyle.italic),
+                                    ),
+                                    Icon(
+                                      Icons.star_border_outlined,
+                                      color: Color.fromARGB(255, 255, 226, 59),
+                                      size: 22,
+                                    ),
+                                    Text(
+                                      widget.recipe.reviews_list != null ? "(${widget.recipe.reviews_list.length.toString()})" : "(0)",
+                                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 10),
+                                    ),
+                                  ],
+                                ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, bottom: 4, left: 4, right: 0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +178,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 2.0),
                           child: Row(children: [
                             widget.recipe.ingredients_missing_list.length != 0
                                 ? Text("Manquants : ${widget.recipe.ingredients_missing_list.length}",
@@ -165,7 +201,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                         ),
                         Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,7 +239,7 @@ class _ItemRecipeState extends State<ItemRecipe> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -221,10 +257,10 @@ class _ItemRecipeState extends State<ItemRecipe> {
                         percent: pertinenceRatio,
                         center: Text(
                           "${widget.recipe.pertinence.toString()}%",
-                          style: const TextStyle(fontFamily: "LemonDays", fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
+                          style: TextStyle(fontFamily: secondeFontFamily, fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
                         ),
                         linearStrokeCap: LinearStrokeCap.roundAll,
-                        progressColor: Colors.redAccent,
+                        progressColor: primaryColor,
                       ),
                     ),
                     widget.recipe.pertinence == 100

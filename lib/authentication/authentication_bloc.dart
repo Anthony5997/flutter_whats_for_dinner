@@ -32,7 +32,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           emit(LoginState(message: response["message"]));
         }
       } catch (e) {
-        print('catch');
+        emit(LoginState(message: "Une erreur est survenue."));
       }
     });
 
@@ -47,7 +47,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           emit(RegisterState(message: response["message"]));
         }
       } catch (e) {
-        print('catch');
+        emit(RegisterState(message: "Une erreur est survenue."));
       }
     });
 

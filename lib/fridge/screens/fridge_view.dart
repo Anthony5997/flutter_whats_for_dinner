@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 import 'package:flutter_whats_for_dinner/widgets/itemIngredient.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class FridgeScreen extends StatefulWidget {
   const FridgeScreen({Key? key}) : super(key: key);
@@ -72,7 +73,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                             ),
                             Container(
                               width: width * 0.88,
-                              height: state.fridge.ingredients_list.length == 1 ? height * 0.30 : height * 0.65,
+                              height: state.fridge.ingredients_list.length == 1 ? height * 0.30 : height * 0.665,
                               // decoration: styleBox(),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
@@ -115,7 +116,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                                 padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
                                 child: Text(
                                   "Votre frigo est vide, remplisser le !",
-                                  style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                                  style: TextStyle(fontFamily: mainFontFamily, fontSize: 24),
                                 ),
                               ),
                             ),
@@ -141,12 +142,12 @@ class _FridgeScreenState extends State<FridgeScreen> {
                                 ),
                               ),
                             ),
-                            const Center(
+                            Center(
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 48.0, horizontal: 12),
                                 child: Text(
                                   "Aucun résultat",
-                                  style: TextStyle(fontFamily: "LemonDays", fontSize: 24),
+                                  style: TextStyle(fontFamily: mainFontFamily, fontSize: 24),
                                 ),
                               ),
                             ),
@@ -168,7 +169,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                 ),
                 // SizedBox(height: height * 0.10),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: ElevatedButton(
                     child: const Text('Ajouter ingrédient'),
                     onPressed: () {

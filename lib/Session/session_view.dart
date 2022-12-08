@@ -15,7 +15,7 @@ class SessionView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mon frigo'),
+        title: const Text('Mon Profil'),
         centerTitle: true,
       ),
       drawer: CustomDrawer(),

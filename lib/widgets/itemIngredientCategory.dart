@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_by_categorie.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class ItemIngredientCategory extends StatefulWidget {
   ItemIngredientCategory(this.ingredients_list) : super();
@@ -34,7 +35,7 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
           padding: const EdgeInsets.all(8),
           child: Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(border: Border.all(width: 2, color: Colors.red), borderRadius: BorderRadius.circular(15)),
+            decoration: BoxDecoration(border: Border.all(width: 2, color: primaryColor), borderRadius: BorderRadius.circular(15)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

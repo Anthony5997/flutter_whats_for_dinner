@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
@@ -35,11 +36,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   'assets/images/Logo-genial.png',
                   height: 100,
                 ),
-                const Text(
-                  'Paramètres',
+                Text(
+                  "What's For Dinner",
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: "LemonDays",
+                    fontFamily: mainFontFamily,
                     fontSize: 16,
                   ),
                 ),
@@ -47,23 +48,81 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ),
           ),
           ListTile(
-            title: const Text(
-              'Mes préférences',
+            title: Text(
+              'Paramètres',
               style: TextStyle(
                 color: Colors.black,
-                fontFamily: "LemonDays",
+                fontFamily: secondeFontFamily,
                 fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
             onTap: () {},
           ),
           ListTile(
-            title: const Text(
+            title: Text(
+              'Mon Frigo',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: secondeFontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(0));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Recette',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: secondeFontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(1));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Mes Favoris',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: secondeFontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(2));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Mon Profil',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: secondeFontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(3));
+            },
+          ),
+          ListTile(
+            title: Text(
               'Déconnexion',
               style: TextStyle(
                 color: Colors.black,
-                fontFamily: "LemonDays",
+                fontFamily: secondeFontFamily,
                 fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
             onTap: () {

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/Session/session_bloc.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -24,45 +25,49 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     return BlocBuilder<SessionBloc, SessionState>(
       builder: (context, state) {
-        return BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: (state is SessionInitial || state is SessionIngredientCategoryState) ? 34 : 28,
-                color: (state is SessionInitial || state is SessionIngredientCategoryState) ? Colors.red[900] : Colors.black,
+        return Container(
+          decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: primaryColor, width: 1.0))),
+          child: BottomNavigationBar(
+            backgroundColor: primaryColor,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  size: (state is SessionInitial || state is SessionIngredientCategoryState) ? 34 : 28,
+                  color: (state is SessionInitial || state is SessionIngredientCategoryState) ? primaryColor : Colors.black,
+                ),
+                label: "Frigo",
               ),
-              label: "Frigo",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.soup_kitchen_rounded,
-                size: state is SessionRecipeListState ? 34 : 28,
-                color: state is SessionRecipeListState ? Colors.red[900] : Colors.black,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.soup_kitchen_rounded,
+                  size: state is SessionRecipeListState ? 34 : 28,
+                  color: state is SessionRecipeListState ? primaryColor : Colors.black,
+                ),
+                label: "Recette",
               ),
-              label: "Recette",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
-                size: state is SessionFavoriteState ? 34 : 28,
-                color: state is SessionFavoriteState ? Colors.red[900] : Colors.black,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.favorite,
+                  size: state is SessionFavoriteState ? 34 : 28,
+                  color: state is SessionFavoriteState ? primaryColor : Colors.black,
+                ),
+                label: "Favoris",
               ),
-              label: "Favoris",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_pin,
-                size: state is SessionProfileState ? 34 : 28,
-                color: state is SessionProfileState ? Colors.red[900] : Colors.black,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person_pin,
+                  size: state is SessionProfileState ? 34 : 28,
+                  color: state is SessionProfileState ? primaryColor : Colors.black,
+                ),
+                label: "Profil",
               ),
-              label: "Profil",
-            ),
-          ],
-          onTap: (index) {
-            widget.change(index);
-            BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(index));
-          },
+            ],
+            onTap: (index) {
+              widget.change(index);
+              BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(index));
+            },
+          ),
         );
       },
     );

@@ -44,6 +44,7 @@ dependencies:
   select_form_field: ^2.2.0
   percent_indicator: ^4.2.2
   swipe_to: ^1.0.2
+  flutter_rating_bar: ^4.0.1
   
 
 dev_dependencies:
@@ -103,6 +104,12 @@ flutter:
     - family: LemonDays
       fonts:
         - asset: assets/fonts/Lemon-days.ttf
+    - family: Magnitude
+      fonts:
+        - asset: assets/fonts/Magnitude.otf
+    - family: Recoleta
+      fonts:
+        - asset: assets/fonts/Recoleta.otf
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
   #   - family: Trajan Pro
