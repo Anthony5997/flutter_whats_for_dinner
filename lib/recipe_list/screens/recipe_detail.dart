@@ -89,10 +89,28 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.recipe.title,
-                        style: TextStyle(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 20),
-                        textAlign: TextAlign.start,
+                      Row(
+                        children: [
+                          Text(
+                            widget.recipe.title,
+                            style: TextStyle(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 20),
+                            textAlign: TextAlign.start,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0, right: 2),
+                                child: Text(
+                                  "pour ${widget.recipe.serving.toString()}",
+                                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 14, fontStyle: FontStyle.italic),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              Icon(Icons.person),
+                            ],
+                          ),
+                        ],
                       ),
                       widget.recipe.global_rating != null
                           ? InkWell(

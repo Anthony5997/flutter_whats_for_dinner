@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_whats_for_dinner/authentication/authentication_bloc.dart';
+import 'package:flutter_whats_for_dinner/models/User.dart';
 import 'package:flutter_whats_for_dinner/services/api_base_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,8 +51,14 @@ class AuthenticationRepository {
     await pref.setBool("logged", true);
   }
 
-  Future<dynamic> getUserSharedPreferences() async {
+  Future<User> getUserSharedPreferences() async {
     SharedPreferences pref = await _userPreferences;
-    return pref;
+    var idUser = await pref.getString("id");
+    var nicknameUser = await pref.getString("nickname");
+    var emailUser = await pref.getString("email");
+    var tokenUser = await pref.getString("token");
+
+    User user = User(id: idUser!, nickname: nicknameUser!, email: emailUser!, token: tokenUser!);
+    return user;
   }
 }

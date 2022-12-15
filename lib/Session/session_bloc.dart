@@ -1,5 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_whats_for_dinner/authentication/repository/authentication_repository.dart';
+import 'package:flutter_whats_for_dinner/fridge/repository/fridge_repository.dart';
+import 'package:flutter_whats_for_dinner/models/Fridge.dart';
+import 'package:flutter_whats_for_dinner/models/User.dart';
 import 'package:flutter_whats_for_dinner/screen/loading_screen.dart';
 
 part 'session_event.dart';
@@ -29,7 +33,11 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         emit(SessionFavoriteState());
       }
       if (event.index == 3) {
-        emit(SessionProfileState());
+        User userInfo = await AuthenticationRepository().getUserSharedPreferences();
+        Fridge userfridge = await FridgeRepository().getUserFridge();
+        print(userInfo.email);
+        print(userInfo.nickname);
+        emit(SessionProfileState(userInfo, userfridge));
       }
     });
 

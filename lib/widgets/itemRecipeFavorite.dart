@@ -37,9 +37,11 @@ class _ItemRecipeFavoriteState extends State<ItemRecipeFavorite> {
   Widget build(BuildContext context) {
     print(widget.recipe.image);
     double pertinenceRatio = 0;
-    if (widget.recipe.pertinence <= 9) {
+     if (widget.recipe.pertinence <= 9) {
       pertinenceRatio = double.parse('0.0${widget.recipe.pertinence}');
-    } else {
+    } else if(widget.recipe.pertinence == 100){
+      pertinenceRatio = double.parse('1.0');
+    }else{
       pertinenceRatio = double.parse('0.${widget.recipe.pertinence}');
     }
     double height = MediaQuery.of(context).size.height;
@@ -274,18 +276,18 @@ class _ItemRecipeFavoriteState extends State<ItemRecipeFavorite> {
                               style: TextStyle(fontFamily: secondeFontFamily, fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
                             ),
                             linearStrokeCap: LinearStrokeCap.roundAll,
-                            progressColor: primaryColor,
+                            progressColor:  pertinenceRatio == 1.0 ? Colors.green : primaryColor,
                           ),
                         ),
-                        widget.recipe.pertinence == 100
-                            ? const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Icon(
-                                  Icons.check,
-                                  color: Colors.green,
-                                ),
-                              )
-                            : Container(),
+                        // widget.recipe.pertinence == 100
+                        //     ? const Padding(
+                        //         padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        //         child: Icon(
+                        //           Icons.check,
+                        //           color: Colors.green,
+                        //         ),
+                        //       )
+                        //     : Container(),
                       ],
                     ),
                   )

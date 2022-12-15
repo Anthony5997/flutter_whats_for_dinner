@@ -31,7 +31,11 @@ class SessionIngredientCategoryState extends SessionState {}
 
 class SessionFavoriteState extends SessionState {}
 
-class SessionProfileState extends SessionState {}
+class SessionProfileState extends SessionState {
+  User userInfo;
+  Fridge fridge;
+  SessionProfileState(this.userInfo, this.fridge);
+}
 
 class SessionRecipeListState extends SessionState {}
 
