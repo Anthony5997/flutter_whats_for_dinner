@@ -9,13 +9,13 @@ class Ingredient {
   int id;
   String name;
   String image;
-  int category_id;
+  int ingredient_category_id;
   String? category_name;
   int? quantity;
   int? unit_id;
   String? unit_name;
 
-  Ingredient({required this.id, required this.name, required this.image, required this.category_id, this.category_name, this.quantity, this.unit_id, this.unit_name});
+  Ingredient({required this.id, required this.name, required this.image, required this.ingredient_category_id, this.category_name, this.quantity, this.unit_id, this.unit_name});
 
   factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
 

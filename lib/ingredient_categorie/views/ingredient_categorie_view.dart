@@ -28,10 +28,7 @@ class IngredientCategorieView extends StatelessWidget {
           children: [
             BlocBuilder<IngredientCategorieBloc, IngredientCategorieState>(
               builder: (context, state) {
-                print("STATE");
-                print(state);
                 if (state is IngredientCategorieLoadedState) {
-                  print(state.ingredientCat);
                   return Expanded(
                     child: GridView(
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

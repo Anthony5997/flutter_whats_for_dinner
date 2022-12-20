@@ -85,11 +85,12 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 18, right: 18, bottom: 15),
+                  padding: const EdgeInsets.only(top: 15.0, left: 18, right: 18, bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      Column(
+                        crossAxisAlignment:  CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.recipe.title,
@@ -100,7 +101,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0, right: 2),
+                                padding: const EdgeInsets.only(left: 0.0, right: 2),
                                 child: Text(
                                   "pour ${widget.recipe.serving.toString()}",
                                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 14, fontStyle: FontStyle.italic),
@@ -140,6 +141,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                               ),
                             )
                           : Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Aucun avis",

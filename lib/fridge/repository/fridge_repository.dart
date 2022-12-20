@@ -10,7 +10,6 @@ class FridgeRepository {
     final SharedPreferences pref = await SharedPreferences.getInstance();
 
     final response = await _helper.getAuthParametre("/fridge");
-
     List<Ingredient> ingredients = [];
     if (response["results"].length > 0) {
       response["results"]["ingredients"].forEach((result) {

@@ -27,7 +27,7 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList["results"]),
+              builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList),
             ),
           );
         },

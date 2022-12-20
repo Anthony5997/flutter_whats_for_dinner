@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_whats_for_dinner/fridge/fridge_bloc.dart';
 import 'package:flutter_whats_for_dinner/ingredient_categorie/repository/ingredient_categorie_repository.dart';
+import 'package:flutter_whats_for_dinner/models/Ingredient.dart';
 import 'package:flutter_whats_for_dinner/widgets/inputs/quantity_field.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/customSnackbar.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
@@ -10,7 +11,7 @@ import 'package:select_form_field/select_form_field.dart';
 
 class AddIngredientButtonDialog extends StatelessWidget {
   AddIngredientButtonDialog(this.ingredient);
-  var ingredient;
+  Ingredient ingredient;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -56,7 +57,7 @@ Future<void> _showMyDialog(context, ingredient) async {
             key: formKey,
             child: Column(
               children: [
-                Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${ingredient['image']}')),
+                Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${ingredient.image}')),
                 CustomQuantityField(),
                 SelectFormField(
                     type: SelectFormFieldType.dropdown,
@@ -89,9 +90,9 @@ Future<void> _showMyDialog(context, ingredient) async {
               if (formKey.currentState?.validate() == true) {
                 formKey.currentState!.save();
 
-                context.read<FridgeBloc>().add(FridgeAddIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: ingredient['id']));
+                context.read<FridgeBloc>().add(FridgeAddIngredientEvent(quantity: formKey.currentState?.value['quantity'], unit: _valueChanged, ingredientId: ingredient.id));
                 Navigator.pop(context, 'Ajouter');
-                ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(context, "${ingredient['name']} ajouté", Colors.green));
+                ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(context, "${ingredient.name} ajouté", Colors.green));
               }
             },
             child: const Text('Ajouter'),
