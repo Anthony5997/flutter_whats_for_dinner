@@ -22,6 +22,12 @@ class RecipeDetailLoadedEvent extends RecipeListEvent {}
 
 class RecipeFavoriteEvent extends RecipeListEvent {}
 
+class RecipeRatingEvent extends RecipeListEvent {
+    const RecipeRatingEvent({required this.id , required this.rate});
+  final String id;
+  final double rate;
+}
+
 class RecipeFavoriteListEvent extends RecipeListEvent {}
 
 class RecipeDetailLoadingEvent extends RecipeListEvent {}

@@ -6,9 +6,10 @@ import 'package:flutter_whats_for_dinner/widgets/ingredientDialogue.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class IngredientByCategorieScreen extends StatefulWidget {
-  IngredientByCategorieScreen({required this.ingredient});
+  IngredientByCategorieScreen({required this.ingredient, required this.category_name});
 
   List<Ingredient> ingredient;
+  String category_name;
   @override
   State<IngredientByCategorieScreen> createState() => _IngredientByCategorieScreenState();
 }
@@ -27,6 +28,7 @@ class _IngredientByCategorieScreenState extends State<IngredientByCategorieScree
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
+        title: Text(widget.category_name, style: TextStyle(fontSize: 24, fontFamily: secondeFontFamily),),
       ),
       body:  BlocProvider<IngredientCategorieBloc>(
         create: (context) => IngredientCategorieBloc()..add(IngredientListEventInitial(widget.ingredient)),
@@ -79,8 +81,8 @@ class _IngredientByCategorieScreenState extends State<IngredientByCategorieScree
                                           backgroundColor: Color.fromRGBO(120, 120, 120, 0),
                                           child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${state.ingredients[i].image}')),
                                         ),
-                                        title: Text(state.ingredients[i].name),
-                                        subtitle: Text(state.ingredients[i].name),
+                                        title: Text(state.ingredients[i].name.capitalise()),
+                                        subtitle: Text(state.ingredients[i].name.capitalise()),
                                         trailing: AddIngredientButtonDialog(state.ingredients[i]),
                                       ),
                                     ],
@@ -142,5 +144,13 @@ class _IngredientByCategorieScreenState extends State<IngredientByCategorieScree
        ),
       ),
       );
+  }
+}
+
+
+
+extension Capitalise on String{
+  String capitalise(){
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }

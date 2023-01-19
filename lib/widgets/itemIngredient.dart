@@ -86,7 +86,7 @@ class _ItemIngredientState extends State<ItemIngredient> {
                     child: SizedBox(width: width * 0.1, child: Image.network(Uri.encodeFull('http://laravel_whats_for_dinner.test/${widget.ingredients_list[widget.index].image}'))),
                   ),
                   title: Text(
-                    widget.ingredients_list[widget.index].name,
+                    widget.ingredients_list[widget.index].name.capitalise(),
                     style: TextStyle(color: primaryColor, fontWeight: FontWeight.w600, fontSize: 14),
                   ),
                   subtitle: Row(
@@ -232,5 +232,12 @@ class _ItemIngredientState extends State<ItemIngredient> {
         ),
       ),
     );
+  }
+}
+
+
+extension Capitalise on String{
+  String capitalise(){
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }

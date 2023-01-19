@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_whats_for_dinner/models/Recipe.dart';
+import 'package:flutter_whats_for_dinner/recipe_list/bloc/recipe_list_bloc.dart';
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class ReviewDialog extends StatefulWidget {
@@ -82,6 +84,7 @@ Future<void> _showMyDialog(context, Recipe recipe) async {
                     onPressed: () => {
                       print('jenvoie rate :'),
                       print(rate),
+                      BlocProvider.of<RecipeListBloc>(context).add(RecipeRatingEvent(id : recipe.id, rate: rate)),
                       Navigator.of(context).pop(),
                     },
                     child: Padding(

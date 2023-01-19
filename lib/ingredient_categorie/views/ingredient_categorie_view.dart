@@ -5,6 +5,7 @@ import 'package:flutter_whats_for_dinner/ingredient_categorie/ingredient_categor
 import 'package:flutter_whats_for_dinner/widgets/customBottomNavigationBar.dart';
 import 'package:flutter_whats_for_dinner/widgets/customDrawer.dart';
 import 'package:flutter_whats_for_dinner/widgets/itemIngredientCategory.dart';
+import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class IngredientCategorieView extends StatelessWidget {
   const IngredientCategorieView({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class IngredientCategorieView extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => BlocProvider.of<SessionBloc>(context).add(SessionPageSelectedEvent(0)),
         ),
+        title: Text("Catégories d'ingrédient", style: TextStyle(fontSize: 24, fontFamily: secondeFontFamily),),
+
       ),
       body: BlocProvider<IngredientCategorieBloc>(
         create: (context) => IngredientCategorieBloc()..add(IngredientCategorieLoadingEvent()),

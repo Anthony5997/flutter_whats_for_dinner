@@ -471,7 +471,10 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: primaryColor,
+                      border: Border.all(
+                        color: Colors.red, 
+                      ),
+                      color: Colors.white,
                     ),
                     padding: EdgeInsets.all(6),
                     child: Column(

@@ -28,6 +28,12 @@ class RecipeListRepository {
     print(response);
   }
 
+    Future<void> sendRating(recipeId, rate ) async {
+    final response = await _helper.postAuthSendUserRating("/review/new", recipeId, rate);
+    print(response);
+  }
+
+
   Future<List<Recipe>> getFavorites() async {
     final response = await _helper.getAuth("/favorite/favoriteRecipe");
     List<Recipe> listRecipe = [];

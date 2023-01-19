@@ -265,6 +265,35 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+    Future<dynamic> postAuthSendUserRating(String url, id, rate) async {
+    dynamic responseJson;
+
+    final SharedPreferences prefs = await _userPreferences;
+    var token = prefs.get("token");
+    try {
+      print("route");
+      print(_baseUrl + url);
+      var response = await http.post(
+        Uri.parse(_baseUrl + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'recipeId': id,
+            'userRating': rate,
+          },
+        ),
+      );
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw Exception('Failed to load');
+    }
+    return responseJson;
+  }
+
   Future<dynamic> getAuthParametre(String url) async {
     dynamic responseJson;
     final SharedPreferences prefs = await _userPreferences;

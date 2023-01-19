@@ -4,7 +4,7 @@ import 'package:flutter_whats_for_dinner/ingredient_categorie/views/ingredient_b
 import 'package:flutter_whats_for_dinner/widgets/ui/themes/theme.dart';
 
 class ItemIngredientCategory extends StatefulWidget {
-  ItemIngredientCategory(this.ingredients_list) : super();
+  ItemIngredientCategory(this.ingredients_list,) : super();
 
   var ingredients_list;
 
@@ -23,11 +23,10 @@ class _ItemIngredientCategoryState extends State<ItemIngredientCategory> {
       child: GestureDetector(
         onTap: () async {
           var ingredientCategorieList = await ingredientCategoryRepository.getById(widget.ingredients_list['id'].toString());
-
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList),
+              builder: (context) => IngredientByCategorieScreen(ingredient: ingredientCategorieList, category_name : widget.ingredients_list['name']),
             ),
           );
         },
