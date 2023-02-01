@@ -39,7 +39,6 @@ class _FridgeScreenState extends State<FridgeScreen> {
           ),
         ],
       ),
-      // backgroundColor: themeColor['principale'],
       drawer: CustomDrawer(),
       body: BlocProvider<FridgeBloc>(
         create: (context) => FridgeBloc()..add(FridgeLoadingEvent()),

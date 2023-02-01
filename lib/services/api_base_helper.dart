@@ -318,7 +318,6 @@ class ApiBaseHelper {
 
   Future<dynamic> postLogin(email, password) async {
     dynamic responseJson;
-    print(_baseUrl);
     try {
       final response = await http.post(
         Uri.parse(_baseUrl + "/auth/login"),
